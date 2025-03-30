@@ -1,0 +1,63 @@
+# -*- coding: mbcs -*-
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1'].ConstrainedSketch(name='__profile__', sheetSize=120.0)
+mdb.models['Model-1'].sketches['__profile__'].Line(point1=(-50, 0.0), point2=(
+    50, 0.0))
+mdb.models['Model-1'].Part(dimensionality=THREE_D, name='ReinBar', type=
+    DEFORMABLE_BODY)
+mdb.models['Model-1'].parts['ReinBar'].BaseWire(sketch=
+    mdb.models['Model-1'].sketches['__profile__'])
+del mdb.models['Model-1'].sketches['__profile__']
+mdb.models['Model-1'].Material(name='HRB400')
+mdb.models['Model-1'].materials['HRB400'].Density(table=((7.85e-09, ), ))
+mdb.models['Model-1'].materials['HRB400'].Elastic(table=((200000.0, 0.3), ))
+mdb.models['Model-1'].materials['HRB400'].Plastic(scaleStress=None, table=((
+    400.0, 0.0), (540, 0.1)))
+mdb.models['Model-1'].TrussSection(area=50.2654824574367, material='HRB400', 
+    name='TrD8HRB400')
+mdb.models['Model-1'].parts['ReinBar'].Set(edges=
+    mdb.models['Model-1'].parts['ReinBar'].edges, name='All')
+mdb.models['Model-1'].parts['ReinBar'].SectionAssignment(offsetType=
+    MIDDLE_SURFACE, region=mdb.models['Model-1'].parts['ReinBar'].sets['All'], 
+    sectionName='TrD8HRB400')
+mdb.models['Model-1'].rootAssembly.Instance(dependent=ON, name='ReinBar-1', 
+    part=mdb.models['Model-1'].parts['ReinBar'])
+mdb.models['Model-1'].StaticStep(initialInc=0.01, maxInc=2, name='Step-1', 
+    previous='Initial', timePeriod=2)
+mdb.models['Model-1'].parts['ReinBar'].Set(name='Right', vertices=
+    mdb.models['Model-1'].parts['ReinBar'].vertices.getSequenceFromMask(mask=(
+    '[#1 ]', ), ))
+mdb.models['Model-1'].DisplacementBC(createStepName='Step-1', name='BC-1', 
+    region=
+    mdb.models['Model-1'].rootAssembly.instances['ReinBar-1'].sets['Right'], 
+    u1=SET, u2=SET, u3=SET, ur1=SET, ur2=SET, ur3=SET)
+mdb.models['Model-1'].parts['ReinBar'].Set(name='Left', vertices=
+    mdb.models['Model-1'].parts['ReinBar'].vertices.getSequenceFromMask(mask=(
+    '[#2 ]', ), ))
+mdb.models['Model-1'].ConcentratedForce(cf1=30000.0, createStepName='Step-1', 
+    name='Load-CF', region=
+    mdb.models['Model-1'].rootAssembly.instances['ReinBar-1'].sets['Left'])
+mdb.models['Model-1'].FieldOutputRequest(createStepName='Step-1', name=
+    'F-Output-1', position=NODES, timeInterval=0.05, variables=('S', 'E'))
+mdb.models['Model-1'].parts['ReinBar'].seedPart(deviationFactor=0.1, 
+    minSizeFactor=0.1, size=5.0)
+mdb.models['Model-1'].parts['ReinBar'].setElementType(elemTypes=(ElemType(
+    elemCode=T3D2, elemLibrary=STANDARD), ), regions=Region(
+    edges=mdb.models['Model-1'].parts['ReinBar'].edges.getSequenceFromMask(
+    mask=('[#1 ]', ), )))
+mdb.models['Model-1'].parts['ReinBar'].generateMesh()
+mdb.Job(model=mdb.models['Model-1'], name='Job-1')
+mdb.jobs['Job-1'].submit(consistencyChecking=OFF)
+# Save by Alice on 2025_03_28-05.27.09; build 2022 2021_09_16-01.57.30 176069

@@ -1,0 +1,1213 @@
+# -*- coding: mbcs -*-
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.Model(name='SimplyBeam0')
+mdb.models['SimplyBeam0'].Material(name='C30')
+mdb.models['SimplyBeam0'].materials['C30'].Density(table=((2.4e-09, ), ))
+mdb.models['SimplyBeam0'].materials['C30'].Elastic(table=((30000, 0.2), ))
+mdb.models['SimplyBeam0'].materials['C30'].ConcreteDamagedPlasticity(table=((
+    30.0, 0.1, 1.16, 0.6667, 0.005), ))
+mdb.models['SimplyBeam0'].materials['C30'].concreteDamagedPlasticity.ConcreteCompressionHardening(
+    table=array([[11.711185, 0.0], [14.451732, 0.000107], [16.543649, 
+    0.000184], [18.054332, 0.00028], [19.076595, 0.000393], [19.706842, 
+    0.000519], [20.033012, 0.000655], [20.12957, 0.000799], [19.644105, 
+    0.001109], [18.550464, 0.001439], [17.236943, 0.001776], [15.908559, 
+    0.002114], [14.658946, 0.002449], [13.522839, 0.00278], [12.506458, 
+    0.003108], [11.603401, 0.003431], [10.802501, 0.003751], [10.09152, 
+    0.004067], [9.458785, 0.004381], [8.893813, 0.004693], [8.387466, 
+    0.005003], [7.931899, 0.00531], [7.520427, 0.005617], [6.649458, 0.006377], 
+    [5.952889, 0.00713], [5.384823, 0.007879], [4.913646, 0.008624], [4.517062, 
+    0.009366], [4.178986, 0.010106], [3.887568, 0.010843], [3.633909, 
+    0.011579], [3.411207, 0.012313], [3.214184, 0.013046], [3.038683, 
+    0.013778], [2.881394, 0.014508], [2.739643, 0.015237], [2.611255, 
+    0.015966], [2.494436, 0.016693], [2.387701, 0.01742], [2.289806, 0.018146], 
+    [2.199701, 0.018871], [2.116497, 0.019595], [2.039435, 0.020319], 
+    [1.497596, 0.027518], [1.186376, 0.034659], [0.98451, 0.041745], [0.843016, 
+    0.04878], [0.738348, 0.055764], [0.657791, 0.062699], [0.593877, 
+    0.069586]]ð€/õ, 'd'))
+mdb.models['SimplyBeam0'].materials['C30'].concreteDamagedPlasticity.ConcreteTensionStiffening(
+    table=array([[2.01019, 0.0], [1.882069, 5.1e-05], [1.689817, 7.6e-05], 
+    [1.510842, 0.000101], [1.359064, 0.000125], [1.233169, 0.000148], 
+    [1.128722, 0.000171], [1.041375, 0.000193], [0.967562, 0.000214], 
+    [0.904509, 0.000235], [0.850086, 0.000256], [0.802662, 0.000276], 
+    [0.760974, 0.000297], [0.724037, 0.000317], [0.691076, 0.000337], 
+    [0.661473, 0.000357], [0.59911, 0.000406], [0.549259, 0.000455], [0.508406, 
+    0.000504], [0.474243, 0.000553], [0.445198, 0.000601], [0.420158, 
+    0.000649], [0.398315, 0.000697], [0.379069, 0.000745], [0.361961, 
+    0.000793], [0.346639, 0.000841], [0.332822, 0.000889], [0.320289, 
+    0.000937], [0.308861, 0.000984], [0.298389, 0.001032], [0.288752, 0.00108], 
+    [0.279849, 0.001127], [0.271595, 0.001175], [0.263918, 0.001222], 
+    [0.256755, 0.00127], [0.250054, 0.001317], [0.200731, 0.001792], [0.170062, 
+    0.002266], [0.148851, 0.002739], [0.133162, 0.003212], [0.12101, 0.003685], 
+    [0.111272, 0.004157], [0.103264, 0.004629]], 'd'))
+mdb.models['SimplyBeam0'].materials['C30'].concreteDamagedPlasticity.ConcreteCompressionDamage(
+    table=array([[0.0, 0.0], [0.09548, 0.000107], [0.13446, 0.000184], 
+    [0.17465, 0.00028], [0.2146, 0.000393], [0.25334, 0.000519], [0.29029, 
+    0.000655], [0.32514, 0.000799], [0.39151, 0.001109], [0.45263, 0.001439], 
+    [0.50652, 0.001776], [0.55309, 0.002114], [0.59308, 0.002449], [0.62741, 
+    0.00278], [0.65699, 0.003108], [0.68261, 0.003431], [0.70494, 0.003751], 
+    [0.72453, 0.004067], [0.74181, 0.004381], [0.75715, 0.004693], [0.77084, 
+    0.005003], [0.78313, 0.00531], [0.79421, 0.005617], [0.81762, 0.006377], 
+    [0.83636, 0.00713], [0.85166, 0.007879], [0.86438, 0.008624], [0.87511, 
+    0.009366], [0.88429, 0.010106], [0.89222, 0.010843], [0.89914, 0.011579], 
+    [0.90523, 0.012313], [0.91063, 0.013046], [0.91546, 0.013778], [0.91979, 
+    0.014508], [0.9237, 0.015237], [0.92725, 0.015966], [0.93048, 0.016693], 
+    [0.93344, 0.01742], [0.93616, 0.018146], [0.93866, 0.018871], [0.94098, 
+    0.019595], [0.94313, 0.020319], [0.95832, 0.027518], [0.96711, 0.034659], 
+    [0.97284, 0.041745], [0.97687, 0.04878], [0.97986, 0.055764], [0.98216, 
+    0.062699], [0.984, 0.069586]], 'd'))
+mdb.models['SimplyBeam0'].materials['C30'].concreteDamagedPlasticity.ConcreteTensionDamage(
+    table=array([[0.0, 0.0], [0.25729, 5.1e-05], [0.34845, 7.6e-05], [0.42372, 
+    0.000101], [0.48469, 0.000125], [0.53433, 0.000148], [0.57523, 0.000171], 
+    [0.60937, 0.000193], [0.63824, 0.000214], [0.66295, 0.000235], [0.68433, 
+    0.000256], [0.70301, 0.000276], [0.71946, 0.000297], [0.73407, 0.000317], 
+    [0.74712, 0.000337], [0.75886, 0.000357], [0.78364, 0.000406], [0.80347, 
+    0.000455], [0.81973, 0.000504], [0.83331, 0.000553], [0.84483, 0.000601], 
+    [0.85474, 0.000649], [0.86337, 0.000697], [0.87095, 0.000745], [0.87766, 
+    0.000793], [0.88365, 0.000841], [0.88904, 0.000889], [0.89391, 0.000937], 
+    [0.89833, 0.000984], [0.90237, 0.001032], [0.90607, 0.00108], [0.90948, 
+    0.001127], [0.91263, 0.001175], [0.91555, 0.001222], [0.91826, 0.00127], 
+    [0.92079, 0.001317], [0.93909, 0.001792], [0.95013, 0.002266], [0.95757, 
+    0.002739], [0.96294, 0.003212], [0.96702, 0.003685], [0.97024, 0.004157], 
+    [0.97284, 0.004629]] [0.111272, 0.004157], [0.103264, 0.004629]], 'd'))
+mdb.models['SimplyBeam0'].Material('HRB400')
+mdb.models['SimplyBeam0'].materials['HRB400'].Density(((7.85e-09, ), ))
+mdb.models['SimplyBeam0'].materials['HRB400'].Elastic(((200000.0, 0.3), ))
+mdb.models['SimplyBeam0'].materials['HRB400'].Plastic(((400, 0.0), (540, 0.1)))
+mdb.models['SimplyBeam0'].Material('HPB300')
+mdb.models['SimplyBeam0'].materials['HPB300'].Density(((7.85e-09, ), ))
+mdb.models['SimplyBeam0'].materials['HPB300'].Elastic(((210000.0, 0.3), ))
+mdb.models['SimplyBeam0'].materials['HPB300'].Plastic(((300, 0.0), (420, 0.1)))
+mdb.models['SimplyBeam0'].Material('RigidSteel')
+mdb.models['SimplyBeam0'].materials['RigidSteel'].Density(((7.85e-09, ), ))
+mdb.models['SimplyBeam0'].materials['RigidSteel'].Elastic(((210000.0, 0.3), ))
+mdb.models['SimplyBeam0'].TrussSection(area=113.097335529233, material='HRB400'
+    , name='TrD12HRB400')
+mdb.models['SimplyBeam0'].TrussSection(area=254.469004940773, material='HRB400'
+    , name='TrD18HRB400')
+mdb.models['SimplyBeam0'].TrussSection(area=50.2654824574367, material='HPB300'
+    , name='TrD8HPB300')
+mdb.models['SimplyBeam0'].HomogeneousSolidSection(material='C30', name='HmC30', 
+    thickness=None)
+mdb.models['SimplyBeam0'].HomogeneousSolidSection(material='RigidSteel', name=
+    'HmRigidSteel', thickness=None)
+mdb.models['SimplyBeam0'].ConstrainedSketch(name='__profile__', sheetSize=
+    5940.0)
+mdb.models['SimplyBeam0'].sketches['__profile__'].Line((-2475.0, 125.0), (
+    2475.0, 125.0))
+mdb.models['SimplyBeam0'].sketches['__profile__'].linearPattern(angle1=0.0, 
+    angle2=270.0, geomList=(
+    mdb.models['SimplyBeam0'].sketches['__profile__'].geometry[2], ), number1=1
+    , number2=3, spacing1=100.0, spacing2=125.0, vertexList=())
+mdb.models['SimplyBeam0'].Part(dimensionality=THREE_D, name='__ReinMesh_Long__'
+    , type=DEFORMABLE_BODY)
+mdb.models['SimplyBeam0'].parts['__ReinMesh_Long__'].BaseWire(sketch=
+    mdb.models['SimplyBeam0'].sketches['__profile__'])
+del mdb.models['SimplyBeam0'].sketches['__profile__']
+mdb.models['SimplyBeam0'].parts['__ReinMesh_Long__'].Set(edges=
+    mdb.models['SimplyBeam0'].parts['__ReinMesh_Long__'].edges, name=
+    'BottomRein')
+mdb.models['SimplyBeam0'].parts['__ReinMesh_Long__'].DatumPlaneByPrincipalPlane(
+    offset=450.0, principalPlane=XYPLANE)
+mdb.models['SimplyBeam0'].ConstrainedSketch(name='__profile__', sheetSize=
+    9900.0, transform=
+    mdb.models['SimplyBeam0'].parts['__ReinMesh_Long__'].MakeSketchTransform(
+    sketchPlane=mdb.models['SimplyBeam0'].parts['__ReinMesh_Long__'].datums[3], 
+    sketchPlaneSide=SIDE1, 
+    sketchUpEdge=mdb.models['SimplyBeam0'].parts['__ReinMesh_Long__'].edges[0], 
+    sketchOrientation=RIGHT, origin=(0.0, 0.0, 450.0)))
+mdb.models['SimplyBeam0'].parts['__ReinMesh_Long__'].projectReferencesOntoSketch(
+    filter=COPLANAR_EDGES, sketch=
+    mdb.models['SimplyBeam0'].sketches['__profile__'])
+mdb.models['SimplyBeam0'].sketches['__profile__'].Line(point1=(125.0, -2475.0), 
+    point2=(125.0, 2475.0))
+mdb.models['SimplyBeam0'].sketches['__profile__'].linearPattern(angle1=180.0, 
+    angle2=90.0, geomList=(
+    mdb.models['SimplyBeam0'].sketches['__profile__'].geometry[2], ), number1=2
+    , number2=1, spacing1=250.0, spacing2=100.0, vertexList=())
+mdb.models['SimplyBeam0'].parts['__ReinMesh_Long__'].Wire(sketch=
+    mdb.models['SimplyBeam0'].sketches['__profile__'], sketchOrientation=RIGHT, 
+    sketchPlane=mdb.models['SimplyBeam0'].parts['__ReinMesh_Long__'].datums[3], 
+    sketchPlaneSide=SIDE1, sketchUpEdge=
+    mdb.models['SimplyBeam0'].parts['__ReinMesh_Long__'].edges[0])
+del mdb.models['SimplyBeam0'].sketches['__profile__']
+mdb.models['SimplyBeam0'].parts['__ReinMesh_Long__'].getFeatureEdges('Wire-2')
+mdb.models['SimplyBeam0'].parts['__ReinMesh_Long__'].Set(edges=
+    mdb.models['SimplyBeam0'].parts['__ReinMesh_Long__'].edges.getSequenceFromMask(
+    mask=('[#18 ]', ), ), name='TopRein')
+mdb.models['SimplyBeam0'].ConstrainedSketch(name='__profile__', sheetSize=
+    540.0)
+mdb.models['SimplyBeam0'].sketches['__profile__'].rectangle(point1=(-225.0, 
+    -125.0), point2=(225.0, 125.0))
+mdb.models['SimplyBeam0'].Part(dimensionality=THREE_D, name=
+    '____ReinMesh_Stirrups____', type=DEFORMABLE_BODY)
+mdb.models['SimplyBeam0'].parts['____ReinMesh_Stirrups____'].BaseWire(sketch=
+    mdb.models['SimplyBeam0'].sketches['__profile__'])
+del mdb.models['SimplyBeam0'].sketches['__profile__']
+mdb.models['SimplyBeam0'].rootAssembly.Instance(dependent=ON, name=
+    '____ReinMesh_Stirrups____-1', part=
+    mdb.models['SimplyBeam0'].parts['____ReinMesh_Stirrups____'])
+mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1'].rotateAboutAxis(
+    angle=90.0, axisDirection=(0.0, 10.0, 0.0), axisPoint=(0.0, 0.0, 0.0))
+mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1'].translate(
+    vector=(2400.0, 0.0, 0.0))
+mdb.models['SimplyBeam0'].rootAssembly.LinearInstancePattern(direction1=(-1.0, 
+    0.0, 0.0), direction2=(0.0, 1.0, 0.0), instanceList=(
+    '____ReinMesh_Stirrups____-1', ), number1=25, number2=1, spacing1=200.0, 
+    spacing2=100.0)
+mdb.models['SimplyBeam0'].rootAssembly.InstanceFromBooleanMerge(domain=GEOMETRY
+    , instances=
+    [mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-2-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-3-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-4-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-5-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-6-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-7-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-8-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-9-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-10-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-11-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-12-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-13-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-14-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-15-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-16-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-17-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-18-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-19-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-20-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-21-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-22-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-23-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-24-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-25-1']]
+    , name='__ReinMesh_Stirrups__', originalInstances=DELETE)
+del mdb.models['SimplyBeam0'].rootAssembly.instances['__ReinMesh_Stirrups__-1']
+del mdb.models['SimplyBeam0'].parts['____ReinMesh_Stirrups____']
+mdb.models['SimplyBeam0'].parts['__ReinMesh_Stirrups__'].Set(edges=
+    mdb.models['SimplyBeam0'].parts['__ReinMesh_Stirrups__'].edges, name=
+    'Stirrups')
+mdb.models['SimplyBeam0'].rootAssembly.Instance(dependent=ON, name=
+    '__ReinMesh_Long__-1', part=
+    mdb.models['SimplyBeam0'].parts['__ReinMesh_Long__'])
+mdb.models['SimplyBeam0'].rootAssembly.Instance(dependent=ON, name=
+    '__ReinMesh_Stirrups__-1', part=
+    mdb.models['SimplyBeam0'].parts['__ReinMesh_Stirrups__'])
+mdb.models['SimplyBeam0'].rootAssembly.instances['__ReinMesh_Stirrups__-1'].translate(
+    vector=(0.0, 0.0, 225.0))
+mdb.models['SimplyBeam0'].parts['__ReinMesh_Long__'].SectionAssignment(
+    mdb.models['SimplyBeam0'].parts['__ReinMesh_Long__'].sets['BottomRein'], 
+    'TrD18HRB400')
+mdb.models['SimplyBeam0'].parts['__ReinMesh_Long__'].SectionAssignment(
+    mdb.models['SimplyBeam0'].parts['__ReinMesh_Long__'].sets['TopRein'], 
+    'TrD12HRB400')
+mdb.models['SimplyBeam0'].parts['__ReinMesh_Stirrups__'].SectionAssignment(
+    mdb.models['SimplyBeam0'].parts['__ReinMesh_Stirrups__'].sets['Stirrups'], 
+    'TrD8HPB300')
+mdb.models['SimplyBeam0'].rootAssembly.InstanceFromBooleanMerge(domain=GEOMETRY
+    , instances=(
+    mdb.models['SimplyBeam0'].rootAssembly.instances['__ReinMesh_Long__-1'], 
+    mdb.models['SimplyBeam0'].rootAssembly.instances['__ReinMesh_Stirrups__-1'])
+    , name='ReinMesh', originalInstances=DELETE)
+mdb.models['SimplyBeam0'].parts['ReinMesh'].Set(edges=
+    mdb.models['SimplyBeam0'].parts['ReinMesh'].edges, name='All')
+del mdb.models['SimplyBeam0'].rootAssembly.instances['ReinMesh-1']
+del mdb.models['SimplyBeam0'].parts['__ReinMesh_Long__']
+del mdb.models['SimplyBeam0'].parts['__ReinMesh_Stirrups__']
+mdb.models['SimplyBeam0'].ConstrainedSketch(name='__profile__', sheetSize=
+    6000.0)
+mdb.models['SimplyBeam0'].sketches['__profile__'].rectangle(point1=(-2500.0, 
+    -150.0), point2=(2500.0, 150.0))
+mdb.models['SimplyBeam0'].Part('Beam', dimensionality=THREE_D, type=
+    DEFORMABLE_BODY)
+mdb.models['SimplyBeam0'].parts['Beam'].BaseSolidExtrude(depth=500.0, sketch=
+    mdb.models['SimplyBeam0'].sketches['__profile__'])
+del mdb.models['SimplyBeam0'].sketches['__profile__']
+mdb.models['SimplyBeam0'].parts['Beam'].Set(cells=
+    mdb.models['SimplyBeam0'].parts['Beam'].cells, name='All')
+mdb.models['SimplyBeam0'].parts['Beam'].SectionAssignment(region=
+    mdb.models['SimplyBeam0'].parts['Beam'].sets['All'], sectionName='HmC30')
+mdb.models['SimplyBeam0'].parts['Beam'].DatumPointByCoordinate(coords=(0, 
+    150.0, 500.0))
+mdb.models['SimplyBeam0'].parts['Beam'].PartitionCellByPlanePointNormal(cells=
+    mdb.models['SimplyBeam0'].parts['Beam'].cells, normal=
+    mdb.models['SimplyBeam0'].parts['Beam'].edges[6], point=
+    mdb.models['SimplyBeam0'].parts['Beam'].datums[3])
+mdb.models['SimplyBeam0'].parts['Beam'].PartitionEdgeByParam(edges=
+    mdb.models['SimplyBeam0'].parts['Beam'].edges[2], parameter=0.5)
+mdb.models['SimplyBeam0'].parts['Beam'].Set(name='MidPoint', vertices=
+    mdb.models['SimplyBeam0'].parts['Beam'].vertices.getSequenceFromMask(mask=(
+    '[#8 ]', ), ))
+mdb.models['SimplyBeam0'].parts['Beam'].DatumPointByCoordinate(coords=(2300.0, 
+    150.0, 500.0))
+mdb.models['SimplyBeam0'].parts['Beam'].DatumPointByCoordinate(coords=(-2300.0, 
+    150.0, 500.0))
+mdb.models['SimplyBeam0'].parts['Beam'].PartitionCellByPlanePointNormal(cells=
+    mdb.models['SimplyBeam0'].parts['Beam'].cells, normal=
+    mdb.models['SimplyBeam0'].parts['Beam'].edges[10], point=
+    mdb.models['SimplyBeam0'].parts['Beam'].datums[7])
+mdb.models['SimplyBeam0'].parts['Beam'].PartitionCellByPlanePointNormal(cells=
+    mdb.models['SimplyBeam0'].parts['Beam'].cells, normal=
+    mdb.models['SimplyBeam0'].parts['Beam'].edges[20], point=
+    mdb.models['SimplyBeam0'].parts['Beam'].datums[8])
+mdb.models['SimplyBeam0'].parts['Beam'].Surface(name='ToPads', side1Faces=
+    mdb.models['SimplyBeam0'].parts['Beam'].faces.getSequenceFromMask(mask=(
+    '[#840 ]', ), ))
+mdb.models['SimplyBeam0'].parts['Beam'].Surface(name='ToLoad', side1Faces=
+    mdb.models['SimplyBeam0'].parts['Beam'].faces.getSequenceFromMask(mask=(
+    '[#82102 ]', ), ))
+mdb.models['SimplyBeam0'].ConstrainedSketch(name='__profile__', sheetSize=
+    360.0)
+mdb.models['SimplyBeam0'].sketches['__profile__'].rectangle(point1=(-100.0, 
+    -150.0), point2=(100.0, 150.0))
+mdb.models['SimplyBeam0'].Part('Pad', dimensionality=THREE_D, type=
+    DEFORMABLE_BODY)
+mdb.models['SimplyBeam0'].parts['Pad'].BaseSolidExtrude(depth=50.0, sketch=
+    mdb.models['SimplyBeam0'].sketches['__profile__'])
+del mdb.models['SimplyBeam0'].sketches['__profile__']
+mdb.models['SimplyBeam0'].parts['Pad'].Set(cells=
+    mdb.models['SimplyBeam0'].parts['Pad'].cells, name='All')
+mdb.models['SimplyBeam0'].parts['Pad'].SectionAssignment(region=
+    mdb.models['SimplyBeam0'].parts['Pad'].sets['All'], sectionName=
+    'HmRigidSteel')
+mdb.models['SimplyBeam0'].parts['Pad'].Surface(name='Top', side1Faces=
+    mdb.models['SimplyBeam0'].parts['Pad'].faces.getSequenceFromMask(mask=(
+    '[#10 ]', ), ))
+mdb.models['SimplyBeam0'].parts['Pad'].Surface(name='Bottom', side1Faces=
+    mdb.models['SimplyBeam0'].parts['Pad'].faces.getSequenceFromMask(mask=(
+    '[#20 ]', ), ))
+mdb.models['SimplyBeam0'].parts['Pad'].ReferencePoint(point=(0.0, 0.0, 0.0))
+mdb.models['SimplyBeam0'].rootAssembly.Instance(dependent=ON, name='Beam1', 
+    part=mdb.models['SimplyBeam0'].parts['Beam'])
+mdb.models['SimplyBeam0'].rootAssembly.Instance(dependent=ON, name='ReinMesh1', 
+    part=mdb.models['SimplyBeam0'].parts['ReinMesh'])
+mdb.models['SimplyBeam0'].rootAssembly.Instance(dependent=ON, name='PadL', 
+    part=mdb.models['SimplyBeam0'].parts['Pad'])
+mdb.models['SimplyBeam0'].rootAssembly.Instance(dependent=ON, name='PadR', 
+    part=mdb.models['SimplyBeam0'].parts['Pad'])
+mdb.models['SimplyBeam0'].rootAssembly.instances['ReinMesh1'].translate(vector=
+    (0, 0, 25.0))
+mdb.models['SimplyBeam0'].rootAssembly.instances['PadL'].translate(vector=(
+    2400.0, 0, -50.0))
+mdb.models['SimplyBeam0'].rootAssembly.instances['PadR'].translate(vector=(
+    -2400.0, 0, -50.0))
+mdb.models['SimplyBeam0'].rootAssembly.Set(name='RpL', referencePoints=(
+    mdb.models['SimplyBeam0'].rootAssembly.instances['PadL'].referencePoints[5], 
+    ))
+mdb.models['SimplyBeam0'].rootAssembly.Set(name='RpR', referencePoints=(
+    mdb.models['SimplyBeam0'].rootAssembly.instances['PadR'].referencePoints[5], 
+    ))
+mdb.models['SimplyBeam0'].rootAssembly.Surface(name='BCPads', side1Faces=
+    mdb.models['SimplyBeam0'].rootAssembly.instances['PadL'].faces.getSequenceFromMask(
+    mask=('[#10 ]', ), )+\
+    mdb.models['SimplyBeam0'].rootAssembly.instances['PadR'].faces.getSequenceFromMask(
+    mask=('[#10 ]', ), ))
+mdb.models['SimplyBeam0'].StaticStep(initialInc=0.01, maxInc=0.2, maxNumInc=
+    10000, minInc=1e-06, name='Step-1', previous='Initial', timePeriod=0.2)
+mdb.models['SimplyBeam0'].StaticStep(initialInc=0.01, maxInc=1, maxNumInc=10000
+    , minInc=1e-06, name='Step-2', previous='Step-1', timePeriod=1)
+mdb.models['SimplyBeam0'].Gravity(comp3=-9810, createStepName='Step-1', name=
+    'Load-G')
+mdb.models['SimplyBeam0'].Pressure(createStepName='Step-2', distributionType=
+    TOTAL_FORCE, magnitude=320000.0, name='Load-P', region=
+    mdb.models['SimplyBeam0'].rootAssembly.instances['Beam1'].surfaces['ToLoad'])
+mdb.models['SimplyBeam0'].DisplacementBC(createStepName='Initial', name='BC-R', 
+    region=mdb.models['SimplyBeam0'].rootAssembly.sets['RpR'], u1=UNSET, u2=SET
+    , u3=SET, ur1=SET, ur2=UNSET, ur3=SET)
+mdb.models['SimplyBeam0'].DisplacementBC(createStepName='Initial', name='BC-L', 
+    region=mdb.models['SimplyBeam0'].rootAssembly.sets['RpL'], u1=SET, u2=SET, 
+    u3=SET, ur1=SET, ur2=UNSET, ur3=SET)
+mdb.models['SimplyBeam0'].FieldOutputRequest(createStepName='Step-1', name=
+    'F-Output-1', variables=('E', 'S', 'U', 'DAMAGEC', 'DAMAGET'))
+mdb.models['SimplyBeam0'].HistoryOutputRequest(createStepName='Step-1', name=
+    'H-Output-1', region=
+    mdb.models['SimplyBeam0'].rootAssembly.instances['Beam1'].sets['MidPoint'], 
+    variables=('U3', ))
+mdb.models['SimplyBeam0'].HistoryOutputRequest(createStepName='Step-1', name=
+    'H-Output-2', region=mdb.models['SimplyBeam0'].rootAssembly.sets['RpL'], 
+    variables=('RF3', ))
+mdb.models['SimplyBeam0'].HistoryOutputRequest(createStepName='Step-1', name=
+    'H-Output-3', region=mdb.models['SimplyBeam0'].rootAssembly.sets['RpR'], 
+    variables=('RF3', ))
+mdb.models['SimplyBeam0'].Coupling(controlPoint=
+    mdb.models['SimplyBeam0'].rootAssembly.sets['RpR'], couplingType=KINEMATIC, 
+    influenceRadius=WHOLE_SURFACE, name='Cg-RpR', surface=
+    mdb.models['SimplyBeam0'].rootAssembly.instances['PadR'].surfaces['Bottom'])
+mdb.models['SimplyBeam0'].Coupling(controlPoint=
+    mdb.models['SimplyBeam0'].rootAssembly.sets['RpL'], couplingType=KINEMATIC, 
+    influenceRadius=WHOLE_SURFACE, name='Cg-RpL', surface=
+    mdb.models['SimplyBeam0'].rootAssembly.instances['PadL'].surfaces['Bottom'])
+mdb.models['SimplyBeam0'].Tie(adjust=ON, main=
+    mdb.models['SimplyBeam0'].rootAssembly.instances['Beam1'].surfaces['ToPads']
+    , name='Tie-BeamPads', positionToleranceMethod=COMPUTED, secondary=
+    mdb.models['SimplyBeam0'].rootAssembly.surfaces['BCPads'], thickness=ON, 
+    tieRotations=ON)
+mdb.models['SimplyBeam0'].EmbeddedRegion(absoluteTolerance=0.0, embeddedRegion=
+    Region(
+    edges=mdb.models['SimplyBeam0'].rootAssembly.instances['ReinMesh1'].edges.getSequenceFromMask(
+    mask=('[#ffffffff:7 #7fffffff ]', ), )), fractionalTolerance=0.05, 
+    hostRegion=Region(
+    cells=mdb.models['SimplyBeam0'].rootAssembly.instances['Beam1'].cells.getSequenceFromMask(
+    mask=('[#f ]', ), )), name='Em-ReinMeshBeam', toleranceMethod=BOTH, 
+    weightFactorTolerance=1e-06)
+mdb.models['SimplyBeam0'].parts['Beam'].seedPart(deviationFactor=0.1, 
+    minSizeFactor=0.1, size=50)
+mdb.models['SimplyBeam0'].parts['Beam'].generateMesh()
+mdb.models['SimplyBeam0'].parts['Pad'].seedPart(deviationFactor=0.1, 
+    minSizeFactor=0.1, size=25)
+mdb.models['SimplyBeam0'].parts['Pad'].generateMesh()
+mdb.models['SimplyBeam0'].parts['ReinMesh'].seedEdgeByNumber(constraint=FINER, 
+    edges=mdb.models['SimplyBeam0'].parts['ReinMesh'].edges, number=1)
+mdb.models['SimplyBeam0'].parts['ReinMesh'].setElementType(elemTypes=(ElemType(
+    elemCode=T3D2, elemLibrary=STANDARD), ), regions=Region(
+    edges=mdb.models['SimplyBeam0'].parts['ReinMesh'].edges.getSequenceFromMask(
+    mask=('[#ffffffff:7 #7fffffff ]', ), )))
+mdb.models['SimplyBeam0'].parts['ReinMesh'].generateMesh()
+mdb.models['SimplyBeam0'].rootAssembly.regenerate()
+mdb.Job(model='SimplyBeam0', multiprocessingMode=THREADS, name=
+    'Job-SimplyBeam0', numCpus=4, numDomains=4)
+mdb.jobs['Job-SimplyBeam0'].submit(consistencyChecking=OFF)
+mdb.Model(name='SimplyBeam1')
+mdb.models['SimplyBeam1'].Material(name='C30')
+mdb.models['SimplyBeam1'].materials['C30'].Density(table=((2.4e-09, ), ))
+mdb.models['SimplyBeam1'].materials['C30'].Elastic(table=((30000, 0.2), ))
+mdb.models['SimplyBeam1'].materials['C30'].ConcreteDamagedPlasticity(table=((
+    30.0, 0.1, 1.16, 0.6667, 0.005), ))
+mdb.models['SimplyBeam1'].materials['C30'].concreteDamagedPlasticity.ConcreteCompressionHardening(
+    table=array([[11.711185, 0.0], [14.451732, 0.000107], [16.543649, 
+    0.000184], [18.054332, 0.00028], [19.076595, 0.000393], [19.706842, 
+    0.000519], [20.033012, 0.000655], [20.12957, 0.000799], [19.644105, 
+    0.001109], [18.550464, 0.001439], [17.236943, 0.001776], [15.908559, 
+    0.002114], [14.658946, 0.002449], [13.522839, 0.00278], [12.506458, 
+    0.003108], [11.603401, 0.003431], [10.802501, 0.003751], [10.09152, 
+    0.004067], [9.458785, 0.004381], [8.893813, 0.004693], [8.387466, 
+    0.005003], [7.931899, 0.00531], [7.520427, 0.005617], [6.649458, 0.006377], 
+    [5.952889, 0.00713], [5.384823, 0.007879], [4.913646, 0.008624], [4.517062, 
+    0.009366], [4.178986, 0.010106], [3.887568, 0.010843], [3.633909, 
+    0.011579], [3.411207, 0.012313], [3.214184, 0.013046], [3.038683, 
+    0.013778], [2.881394, 0.014508], [2.739643, 0.015237], [2.611255, 
+    0.015966], [2.494436, 0.016693], [2.387701, 0.01742], [2.289806, 0.018146], 
+    [2.199701, 0.018871], [2.116497, 0.019595], [2.039435, 0.020319], 
+    [1.497596, 0.027518], [1.186376, 0.034659], [0.98451, 0.041745], [0.843016, 
+    0.04878], [0.738348, 0.055764], [0.657791, 0.062699], [0.593877, 
+    0.069586]], 'd'))
+mdb.models['SimplyBeam1'].materials['C30'].concreteDamagedPlasticity.ConcreteTensionStiffening(
+    table=array([[2.01019, 0.0], [1.882069, 5.1e-05], [1.689817, 7.6e-05], 
+    [1.510842, 0.000101], [1.359064, 0.000125], [1.233169, 0.000148], 
+    [1.128722, 0.000171], [1.041375, 0.000193], [0.967562, 0.000214], 
+    [0.904509, 0.000235], [0.850086, 0.000256], [0.802662, 0.000276], 
+    [0.760974, 0.000297], [0.724037, 0.000317], [0.691076, 0.000337], 
+    [0.661473, 0.000357], [0.59911, 0.000406], [0.549259, 0.000455], [0.508406, 
+    0.000504], [0.474243, 0.000553], [0.445198, 0.000601], [0.420158, 
+    0.000649], [0.398315, 0.000697], [0.379069, 0.000745], [0.361961, 
+    0.000793], [0.346639, 0.000841], [0.332822, 0.000889], [0.320289, 
+    0.000937], [0.308861, 0.000984], [0.298389, 0.001032], [0.288752, 0.00108], 
+    [0.279849, 0.001127], [0.271595, 0.001175], [0.263918, 0.001222], 
+    [0.256755, 0.00127], [0.250054, 0.001317], [0.200731, 0.001792], [0.170062, 
+    0.002266], [0.148851, 0.002739], [0.133162, 0.003212], [0.12101, 0.003685], 
+    [0.111272, 0.004157], [0.103264, 0.004629]], 'd'))
+mdb.models['SimplyBeam1'].materials['C30'].concreteDamagedPlasticity.ConcreteCompressionDamage(
+    table=array([[0.0, 0.0], [0.09548, 0.000107], [0.13446, 0.000184], 
+    [0.17465, 0.00028], [0.2146, 0.000393], [0.25334, 0.000519], [0.29029, 
+    0.000655], [0.32514, 0.000799], [0.39151, 0.001109], [0.45263, 0.001439], 
+    [0.50652, 0.001776], [0.55309, 0.002114], [0.59308, 0.002449], [0.62741, 
+    0.00278], [0.65699, 0.003108], [0.68261, 0.003431], [0.70494, 0.003751], 
+    [0.72453, 0.004067], [0.74181, 0.004381], [0.75715, 0.004693], [0.77084, 
+    0.005003], [0.78313, 0.00531], [0.79421, 0.005617], [0.81762, 0.006377], 
+    [0.83636, 0.00713], [0.85166, 0.007879], [0.86438, 0.008624], [0.87511, 
+    0.009366], [0.88429, 0.010106], [0.89222, 0.010843], [0.89914, 0.011579], 
+    [0.90523, 0.012313], [0.91063, 0.013046], [0.91546, 0.013778], [0.91979, 
+    0.014508], [0.9237, 0.015237], [0.92725, 0.015966], [0.93048, 0.016693], 
+    [0.93344, 0.01742], [0.93616, 0.018146], [0.93866, 0.018871], [0.94098, 
+    0.019595], [0.94313, 0.020319], [0.95832, 0.027518], [0.96711, 0.034659], 
+    [0.97284, 0.041745], [0.97687, 0.04878], [0.97986, 0.055764], [0.98216, 
+    0.062699], [0.984, 0.069586]]04878], [0.738348, 0.055764], [0.657791, 
+    0.062699], [0.593877, 0.069586]], 'd'))
+mdb.models['SimplyBeam1'].materials['C30'].concreteDamagedPlasticity.ConcreteTensionDamage(
+    table=array([[0.0, 0.0], [0.25729, 5.1e-05], [0.34845, 7.6e-05], [0.42372, 
+    0.000101], [0.48469, 0.000125], [0.53433, 0.000148], [0.57523, 0.000171], 
+    [0.60937, 0.000193], [0.63824, 0.000214], [0.66295, 0.000235], [0.68433, 
+    0.000256], [0.70301, 0.000276], [0.71946, 0.000297], [0.73407, 0.000317], 
+    [0.74712, 0.000337], [0.75886, 0.000357], [0.78364, 0.000406], [0.80347, 
+    0.000455], [0.81973, 0.000504], [0.83331, 0.000553], [0.84483, 0.000601], 
+    [0.85474, 0.000649], [0.86337, 0.000697], [0.87095, 0.000745], [0.87766, 
+    0.000793], [0.88365, 0.000841], [0.88904, 0.000889], [0.89391, 0.000937], 
+    [0.89833, 0.000984], [0.90237, 0.001032], [0.90607, 0.00108], [0.90948, 
+    0.001127], [0.91263, 0.001175], [0.91555, 0.001222], [0.91826, 0.00127], 
+    [0.92079, 0.001317], [0.93909, 0.001792], [0.95013, 0.002266], [0.95757, 
+    0.002739], [0.96294, 0.003212], [0.96702, 0.003685], [0.97024, 0.004157], 
+    [0.97284, 0.004629]] [0.111272, 0.004157], [0.103264, 0.004629]], 'd'))
+mdb.models['SimplyBeam1'].Material('HRB400')
+mdb.models['SimplyBeam1'].materials['HRB400'].Density(((7.85e-09, ), ))
+mdb.models['SimplyBeam1'].materials['HRB400'].Elastic(((200000.0, 0.3), ))
+mdb.models['SimplyBeam1'].materials['HRB400'].Plastic(((400, 0.0), (540, 0.1)))
+mdb.models['SimplyBeam1'].Material('HPB300')
+mdb.models['SimplyBeam1'].materials['HPB300'].Density(((7.85e-09, ), ))
+mdb.models['SimplyBeam1'].materials['HPB300'].Elastic(((210000.0, 0.3), ))
+mdb.models['SimplyBeam1'].materials['HPB300'].Plastic(((300, 0.0), (420, 0.1)))
+mdb.models['SimplyBeam1'].Material('RigidSteel')
+mdb.models['SimplyBeam1'].materials['RigidSteel'].Density(((7.85e-09, ), ))
+mdb.models['SimplyBeam1'].materials['RigidSteel'].Elastic(((210000.0, 0.3), ))
+mdb.models['SimplyBeam1'].TrussSection(area=113.097335529233, material='HRB400'
+    , name='TrD12HRB400')
+mdb.models['SimplyBeam1'].TrussSection(area=254.469004940773, material='HRB400'
+    , name='TrD18HRB400')
+mdb.models['SimplyBeam1'].TrussSection(area=50.2654824574367, material='HPB300'
+    , name='TrD8HPB300')
+mdb.models['SimplyBeam1'].HomogeneousSolidSection(material='C30', name='HmC30', 
+    thickness=None)
+mdb.models['SimplyBeam1'].HomogeneousSolidSection(material='RigidSteel', name=
+    'HmRigidSteel', thickness=None)
+mdb.models['SimplyBeam1'].ConstrainedSketch(name='__profile__', sheetSize=
+    5940.0)
+mdb.models['SimplyBeam1'].sketches['__profile__'].Line((-2475.0, 125.0), (
+    2475.0, 125.0))
+mdb.models['SimplyBeam1'].sketches['__profile__'].linearPattern(angle1=0.0, 
+    angle2=270.0, geomList=(
+    mdb.models['SimplyBeam1'].sketches['__profile__'].geometry[2], ), number1=1
+    , number2=3, spacing1=100.0, spacing2=125.0, vertexList=())
+mdb.models['SimplyBeam1'].Part(dimensionality=THREE_D, name='__ReinMesh_Long__'
+    , type=DEFORMABLE_BODY)
+mdb.models['SimplyBeam1'].parts['__ReinMesh_Long__'].BaseWire(sketch=
+    mdb.models['SimplyBeam1'].sketches['__profile__'])
+del mdb.models['SimplyBeam1'].sketches['__profile__']
+mdb.models['SimplyBeam1'].parts['__ReinMesh_Long__'].Set(edges=
+    mdb.models['SimplyBeam1'].parts['__ReinMesh_Long__'].edges, name=
+    'BottomRein')
+mdb.models['SimplyBeam1'].parts['__ReinMesh_Long__'].DatumPlaneByPrincipalPlane(
+    offset=450.0, principalPlane=XYPLANE)
+mdb.models['SimplyBeam1'].ConstrainedSketch(name='__profile__', sheetSize=
+    9900.0, transform=
+    mdb.models['SimplyBeam1'].parts['__ReinMesh_Long__'].MakeSketchTransform(
+    sketchPlane=mdb.models['SimplyBeam1'].parts['__ReinMesh_Long__'].datums[3], 
+    sketchPlaneSide=SIDE1, 
+    sketchUpEdge=mdb.models['SimplyBeam1'].parts['__ReinMesh_Long__'].edges[0], 
+    sketchOrientation=RIGHT, origin=(0.0, 0.0, 450.0)))
+mdb.models['SimplyBeam1'].parts['__ReinMesh_Long__'].projectReferencesOntoSketch(
+    filter=COPLANAR_EDGES, sketch=
+    mdb.models['SimplyBeam1'].sketches['__profile__'])
+mdb.models['SimplyBeam1'].sketches['__profile__'].Line(point1=(125.0, -2475.0), 
+    point2=(125.0, 2475.0))
+mdb.models['SimplyBeam1'].sketches['__profile__'].linearPattern(angle1=180.0, 
+    angle2=90.0, geomList=(
+    mdb.models['SimplyBeam1'].sketches['__profile__'].geometry[2], ), number1=2
+    , number2=1, spacing1=250.0, spacing2=100.0, vertexList=())
+mdb.models['SimplyBeam1'].parts['__ReinMesh_Long__'].Wire(sketch=
+    mdb.models['SimplyBeam1'].sketches['__profile__'], sketchOrientation=RIGHT, 
+    sketchPlane=mdb.models['SimplyBeam1'].parts['__ReinMesh_Long__'].datums[3], 
+    sketchPlaneSide=SIDE1, sketchUpEdge=
+    mdb.models['SimplyBeam1'].parts['__ReinMesh_Long__'].edges[0])
+del mdb.models['SimplyBeam1'].sketches['__profile__']
+mdb.models['SimplyBeam1'].parts['__ReinMesh_Long__'].getFeatureEdges('Wire-2')
+mdb.models['SimplyBeam1'].parts['__ReinMesh_Long__'].Set(edges=
+    mdb.models['SimplyBeam1'].parts['__ReinMesh_Long__'].edges.getSequenceFromMask(
+    mask=('[#18 ]', ), ), name='TopRein')
+mdb.models['SimplyBeam1'].ConstrainedSketch(name='__profile__', sheetSize=
+    540.0)
+mdb.models['SimplyBeam1'].sketches['__profile__'].rectangle(point1=(-225.0, 
+    -125.0), point2=(225.0, 125.0))
+mdb.models['SimplyBeam1'].Part(dimensionality=THREE_D, name=
+    '____ReinMesh_Stirrups____', type=DEFORMABLE_BODY)
+mdb.models['SimplyBeam1'].parts['____ReinMesh_Stirrups____'].BaseWire(sketch=
+    mdb.models['SimplyBeam1'].sketches['__profile__'])
+del mdb.models['SimplyBeam1'].sketches['__profile__']
+mdb.models['SimplyBeam1'].rootAssembly.Instance(dependent=ON, name=
+    '____ReinMesh_Stirrups____-1', part=
+    mdb.models['SimplyBeam1'].parts['____ReinMesh_Stirrups____'])
+mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1'].rotateAboutAxis(
+    angle=90.0, axisDirection=(0.0, 10.0, 0.0), axisPoint=(0.0, 0.0, 0.0))
+mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1'].translate(
+    vector=(2400.0, 0.0, 0.0))
+mdb.models['SimplyBeam1'].rootAssembly.LinearInstancePattern(direction1=(-1.0, 
+    0.0, 0.0), direction2=(0.0, 1.0, 0.0), instanceList=(
+    '____ReinMesh_Stirrups____-1', ), number1=25, number2=1, spacing1=200.0, 
+    spacing2=100.0)
+mdb.models['SimplyBeam1'].rootAssembly.InstanceFromBooleanMerge(domain=GEOMETRY
+    , instances=
+    [mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-2-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-3-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-4-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-5-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-6-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-7-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-8-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-9-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-10-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-11-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-12-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-13-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-14-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-15-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-16-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-17-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-18-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-19-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-20-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-21-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-22-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-23-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-24-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-25-1']]
+    , name='__ReinMesh_Stirrups__', originalInstances=DELETE)
+del mdb.models['SimplyBeam1'].rootAssembly.instances['__ReinMesh_Stirrups__-1']
+del mdb.models['SimplyBeam1'].parts['____ReinMesh_Stirrups____']
+mdb.models['SimplyBeam1'].parts['__ReinMesh_Stirrups__'].Set(edges=
+    mdb.models['SimplyBeam1'].parts['__ReinMesh_Stirrups__'].edges, name=
+    'Stirrups')
+mdb.models['SimplyBeam1'].rootAssembly.Instance(dependent=ON, name=
+    '__ReinMesh_Long__-1', part=
+    mdb.models['SimplyBeam1'].parts['__ReinMesh_Long__'])
+mdb.models['SimplyBeam1'].rootAssembly.Instance(dependent=ON, name=
+    '__ReinMesh_Stirrups__-1', part=
+    mdb.models['SimplyBeam1'].parts['__ReinMesh_Stirrups__'])
+mdb.models['SimplyBeam1'].rootAssembly.instances['__ReinMesh_Stirrups__-1'].translate(
+    vector=(0.0, 0.0, 225.0))
+mdb.models['SimplyBeam1'].parts['__ReinMesh_Long__'].SectionAssignment(
+    mdb.models['SimplyBeam1'].parts['__ReinMesh_Long__'].sets['BottomRein'], 
+    'TrD18HRB400')
+mdb.models['SimplyBeam1'].parts['__ReinMesh_Long__'].SectionAssignment(
+    mdb.models['SimplyBeam1'].parts['__ReinMesh_Long__'].sets['TopRein'], 
+    'TrD12HRB400')
+mdb.models['SimplyBeam1'].parts['__ReinMesh_Stirrups__'].SectionAssignment(
+    mdb.models['SimplyBeam1'].parts['__ReinMesh_Stirrups__'].sets['Stirrups'], 
+    'TrD8HPB300')
+mdb.models['SimplyBeam1'].rootAssembly.InstanceFromBooleanMerge(domain=GEOMETRY
+    , instances=(
+    mdb.models['SimplyBeam1'].rootAssembly.instances['__ReinMesh_Long__-1'], 
+    mdb.models['SimplyBeam1'].rootAssembly.instances['__ReinMesh_Stirrups__-1'])
+    , name='ReinMesh', originalInstances=DELETE)
+mdb.models['SimplyBeam1'].parts['ReinMesh'].Set(edges=
+    mdb.models['SimplyBeam1'].parts['ReinMesh'].edges, name='All')
+del mdb.models['SimplyBeam1'].rootAssembly.instances['ReinMesh-1']
+del mdb.models['SimplyBeam1'].parts['__ReinMesh_Long__']
+del mdb.models['SimplyBeam1'].parts['__ReinMesh_Stirrups__']
+mdb.models['SimplyBeam1'].ConstrainedSketch(name='__profile__', sheetSize=
+    6000.0)
+mdb.models['SimplyBeam1'].sketches['__profile__'].rectangle(point1=(-2500.0, 
+    -150.0), point2=(2500.0, 150.0))
+mdb.models['SimplyBeam1'].Part('Beam', dimensionality=THREE_D, type=
+    DEFORMABLE_BODY)
+mdb.models['SimplyBeam1'].parts['Beam'].BaseSolidExtrude(depth=500.0, sketch=
+    mdb.models['SimplyBeam1'].sketches['__profile__'])
+del mdb.models['SimplyBeam1'].sketches['__profile__']
+mdb.models['SimplyBeam1'].parts['Beam'].Set(cells=
+    mdb.models['SimplyBeam1'].parts['Beam'].cells, name='All')
+mdb.models['SimplyBeam1'].parts['Beam'].SectionAssignment(region=
+    mdb.models['SimplyBeam1'].parts['Beam'].sets['All'], sectionName='HmC30')
+mdb.models['SimplyBeam1'].parts['Beam'].DatumPointByCoordinate(coords=(0, 
+    150.0, 500.0))
+mdb.models['SimplyBeam1'].parts['Beam'].PartitionCellByPlanePointNormal(cells=
+    mdb.models['SimplyBeam1'].parts['Beam'].cells, normal=
+    mdb.models['SimplyBeam1'].parts['Beam'].edges[6], point=
+    mdb.models['SimplyBeam1'].parts['Beam'].datums[3])
+mdb.models['SimplyBeam1'].parts['Beam'].PartitionEdgeByParam(edges=
+    mdb.models['SimplyBeam1'].parts['Beam'].edges[2], parameter=0.5)
+mdb.models['SimplyBeam1'].parts['Beam'].Set(name='MidPoint', vertices=
+    mdb.models['SimplyBeam1'].parts['Beam'].vertices.getSequenceFromMask(mask=(
+    '[#8 ]', ), ))
+mdb.models['SimplyBeam1'].parts['Beam'].DatumPointByCoordinate(coords=(2300.0, 
+    150.0, 500.0))
+mdb.models['SimplyBeam1'].parts['Beam'].DatumPointByCoordinate(coords=(-2300.0, 
+    150.0, 500.0))
+mdb.models['SimplyBeam1'].parts['Beam'].PartitionCellByPlanePointNormal(cells=
+    mdb.models['SimplyBeam1'].parts['Beam'].cells, normal=
+    mdb.models['SimplyBeam1'].parts['Beam'].edges[10], point=
+    mdb.models['SimplyBeam1'].parts['Beam'].datums[7])
+mdb.models['SimplyBeam1'].parts['Beam'].PartitionCellByPlanePointNormal(cells=
+    mdb.models['SimplyBeam1'].parts['Beam'].cells, normal=
+    mdb.models['SimplyBeam1'].parts['Beam'].edges[20], point=
+    mdb.models['SimplyBeam1'].parts['Beam'].datums[8])
+mdb.models['SimplyBeam1'].parts['Beam'].Surface(name='ToPads', side1Faces=
+    mdb.models['SimplyBeam1'].parts['Beam'].faces.getSequenceFromMask(mask=(
+    '[#840 ]', ), ))
+mdb.models['SimplyBeam1'].parts['Beam'].DatumPointByCoordinate(coords=(100.0, 
+    150.0, 500.0))
+mdb.models['SimplyBeam1'].parts['Beam'].DatumPointByCoordinate(coords=(-100.0, 
+    150.0, 500.0))
+mdb.models['SimplyBeam1'].parts['Beam'].PartitionCellByPlanePointNormal(cells=
+    mdb.models['SimplyBeam1'].parts['Beam'].cells, normal=
+    mdb.models['SimplyBeam1'].parts['Beam'].edges[31], point=
+    mdb.models['SimplyBeam1'].parts['Beam'].datums[12])
+mdb.models['SimplyBeam1'].parts['Beam'].PartitionCellByPlanePointNormal(cells=
+    mdb.models['SimplyBeam1'].parts['Beam'].cells, normal=
+    mdb.models['SimplyBeam1'].parts['Beam'].edges[4], point=
+    mdb.models['SimplyBeam1'].parts['Beam'].datums[13])
+mdb.models['SimplyBeam1'].parts['Beam'].Surface(name='ToLoad', side1Faces=
+    mdb.models['SimplyBeam1'].parts['Beam'].faces.getSequenceFromMask(mask=(
+    '[#40002 ]', ), ))
+mdb.models['SimplyBeam1'].ConstrainedSketch(name='__profile__', sheetSize=
+    360.0)
+mdb.models['SimplyBeam1'].sketches['__profile__'].rectangle(point1=(-100.0, 
+    -150.0), point2=(100.0, 150.0))
+mdb.models['SimplyBeam1'].Part('Pad', dimensionality=THREE_D, type=
+    DEFORMABLE_BODY)
+mdb.models['SimplyBeam1'].parts['Pad'].BaseSolidExtrude(depth=50.0, sketch=
+    mdb.models['SimplyBeam1'].sketches['__profile__'])
+del mdb.models['SimplyBeam1'].sketches['__profile__']
+mdb.models['SimplyBeam1'].parts['Pad'].Set(cells=
+    mdb.models['SimplyBeam1'].parts['Pad'].cells, name='All')
+mdb.models['SimplyBeam1'].parts['Pad'].SectionAssignment(region=
+    mdb.models['SimplyBeam1'].parts['Pad'].sets['All'], sectionName=
+    'HmRigidSteel')
+mdb.models['SimplyBeam1'].parts['Pad'].Surface(name='Top', side1Faces=
+    mdb.models['SimplyBeam1'].parts['Pad'].faces.getSequenceFromMask(mask=(
+    '[#10 ]', ), ))
+mdb.models['SimplyBeam1'].parts['Pad'].Surface(name='Bottom', side1Faces=
+    mdb.models['SimplyBeam1'].parts['Pad'].faces.getSequenceFromMask(mask=(
+    '[#20 ]', ), ))
+mdb.models['SimplyBeam1'].parts['Pad'].ReferencePoint(point=(0.0, 0.0, 0.0))
+mdb.models['SimplyBeam1'].rootAssembly.Instance(dependent=ON, name='Beam1', 
+    part=mdb.models['SimplyBeam1'].parts['Beam'])
+mdb.models['SimplyBeam1'].rootAssembly.Instance(dependent=ON, name='ReinMesh1', 
+    part=mdb.models['SimplyBeam1'].parts['ReinMesh'])
+mdb.models['SimplyBeam1'].rootAssembly.Instance(dependent=ON, name='PadL', 
+    part=mdb.models['SimplyBeam1'].parts['Pad'])
+mdb.models['SimplyBeam1'].rootAssembly.Instance(dependent=ON, name='PadR', 
+    part=mdb.models['SimplyBeam1'].parts['Pad'])
+mdb.models['SimplyBeam1'].rootAssembly.Instance(dependent=ON, name='PadT', 
+    part=mdb.models['SimplyBeam1'].parts['Pad'])
+mdb.models['SimplyBeam1'].rootAssembly.instances['ReinMesh1'].translate(vector=
+    (0, 0, 25.0))
+mdb.models['SimplyBeam1'].rootAssembly.instances['PadL'].translate(vector=(
+    2400.0, 0, -50.0))
+mdb.models['SimplyBeam1'].rootAssembly.instances['PadR'].translate(vector=(
+    -2400.0, 0, -50.0))
+mdb.models['SimplyBeam1'].rootAssembly.instances['PadT'].rotateAboutAxis((0, 0, 
+    0), (0, 1, 0), 180)
+mdb.models['SimplyBeam1'].rootAssembly.instances['PadT'].translate(vector=(0, 
+    0, 550.0))
+mdb.models['SimplyBeam1'].rootAssembly.Set(name='RpL', referencePoints=(
+    mdb.models['SimplyBeam1'].rootAssembly.instances['PadL'].referencePoints[5], 
+    ))
+mdb.models['SimplyBeam1'].rootAssembly.Set(name='RpR', referencePoints=(
+    mdb.models['SimplyBeam1'].rootAssembly.instances['PadR'].referencePoints[5], 
+    ))
+mdb.models['SimplyBeam1'].rootAssembly.Set(name='RpT', referencePoints=(
+    mdb.models['SimplyBeam1'].rootAssembly.instances['PadT'].referencePoints[5], 
+    ))
+mdb.models['SimplyBeam1'].rootAssembly.Surface(name='BCPads', side1Faces=
+    mdb.models['SimplyBeam1'].rootAssembly.instances['PadL'].faces.getSequenceFromMask(
+    mask=('[#10 ]', ), )+\
+    mdb.models['SimplyBeam1'].rootAssembly.instances['PadR'].faces.getSequenceFromMask(
+    mask=('[#10 ]', ), ))
+mdb.models['SimplyBeam1'].rootAssembly.Surface(name='LoadPad', side1Faces=
+    mdb.models['SimplyBeam1'].rootAssembly.instances['PadT'].faces.getSequenceFromMask(
+    mask=('[#10 ]', ), ))
+mdb.models['SimplyBeam1'].StaticStep(initialInc=0.01, maxInc=0.2, maxNumInc=
+    10000, minInc=1e-06, name='Step-1', previous='Initial', timePeriod=0.2)
+mdb.models['SimplyBeam1'].StaticStep(initialInc=0.01, maxInc=1, maxNumInc=10000
+    , minInc=1e-06, name='Step-2', previous='Step-1', timePeriod=1)
+mdb.models['SimplyBeam1'].Gravity(comp3=-9810, createStepName='Step-1', name=
+    'Load-G')
+mdb.models['SimplyBeam1'].ConcentratedForce(cf3=-180000.0, createStepName=
+    'Step-2', name='Load-CF', region=
+    mdb.models['SimplyBeam1'].rootAssembly.sets['RpT'])
+mdb.models['SimplyBeam1'].DisplacementBC(createStepName='Initial', name='BC-R', 
+    region=mdb.models['SimplyBeam1'].rootAssembly.sets['RpR'], u1=UNSET, u2=SET
+    , u3=SET, ur1=SET, ur2=UNSET, ur3=SET)
+mdb.models['SimplyBeam1'].DisplacementBC(createStepName='Initial', name='BC-L', 
+    region=mdb.models['SimplyBeam1'].rootAssembly.sets['RpL'], u1=SET, u2=SET, 
+    u3=SET, ur1=SET, ur2=UNSET, ur3=SET)
+mdb.models['SimplyBeam1'].FieldOutputRequest(createStepName='Step-1', name=
+    'F-Output-1', variables=('E', 'S', 'U', 'DAMAGEC', 'DAMAGET'))
+mdb.models['SimplyBeam1'].HistoryOutputRequest(createStepName='Step-1', name=
+    'H-Output-1', region=
+    mdb.models['SimplyBeam1'].rootAssembly.instances['Beam1'].sets['MidPoint'], 
+    variables=('U3', ))
+mdb.models['SimplyBeam1'].HistoryOutputRequest(createStepName='Step-1', name=
+    'H-Output-2', region=mdb.models['SimplyBeam1'].rootAssembly.sets['RpL'], 
+    variables=('RF3', ))
+mdb.models['SimplyBeam1'].HistoryOutputRequest(createStepName='Step-1', name=
+    'H-Output-3', region=mdb.models['SimplyBeam1'].rootAssembly.sets['RpR'], 
+    variables=('RF3', ))
+mdb.models['SimplyBeam1'].Coupling(controlPoint=
+    mdb.models['SimplyBeam1'].rootAssembly.sets['RpR'], couplingType=KINEMATIC, 
+    influenceRadius=WHOLE_SURFACE, name='Cg-RpR', surface=
+    mdb.models['SimplyBeam1'].rootAssembly.instances['PadR'].surfaces['Bottom'])
+mdb.models['SimplyBeam1'].Coupling(controlPoint=
+    mdb.models['SimplyBeam1'].rootAssembly.sets['RpL'], couplingType=KINEMATIC, 
+    influenceRadius=WHOLE_SURFACE, name='Cg-RpL', surface=
+    mdb.models['SimplyBeam1'].rootAssembly.instances['PadL'].surfaces['Bottom'])
+mdb.models['SimplyBeam1'].Coupling(controlPoint=
+    mdb.models['SimplyBeam1'].rootAssembly.sets['RpT'], couplingType=KINEMATIC, 
+    influenceRadius=WHOLE_SURFACE, name='Cg-RpT', surface=
+    mdb.models['SimplyBeam1'].rootAssembly.instances['PadT'].surfaces['Bottom'])
+mdb.models['SimplyBeam1'].Tie(adjust=ON, main=
+    mdb.models['SimplyBeam1'].rootAssembly.instances['Beam1'].surfaces['ToPads']
+    , name='Tie-BeamPads', positionToleranceMethod=COMPUTED, secondary=
+    mdb.models['SimplyBeam1'].rootAssembly.surfaces['BCPads'], thickness=ON, 
+    tieRotations=ON)
+mdb.models['SimplyBeam1'].Tie(adjust=ON, main=
+    mdb.models['SimplyBeam1'].rootAssembly.instances['Beam1'].surfaces['ToLoad']
+    , name='Tie-BeamPadsT', positionToleranceMethod=COMPUTED, secondary=
+    mdb.models['SimplyBeam1'].rootAssembly.surfaces['LoadPad'], thickness=ON, 
+    tieRotations=ON)
+mdb.models['SimplyBeam1'].EmbeddedRegion(absoluteTolerance=0.0, embeddedRegion=
+    Region(
+    edges=mdb.models['SimplyBeam1'].rootAssembly.instances['ReinMesh1'].edges.getSequenceFromMask(
+    mask=('[#ffffffff:7 #7fffffff ]', ), )), fractionalTolerance=0.05, 
+    hostRegion=Region(
+    cells=mdb.models['SimplyBeam1'].rootAssembly.instances['Beam1'].cells.getSequenceFromMask(
+    mask=('[#3f ]', ), )), name='Em-ReinMeshBeam', toleranceMethod=BOTH, 
+    weightFactorTolerance=1e-06)
+mdb.models['SimplyBeam1'].parts['Beam'].seedPart(deviationFactor=0.1, 
+    minSizeFactor=0.1, size=50)
+mdb.models['SimplyBeam1'].parts['Beam'].generateMesh()
+mdb.models['SimplyBeam1'].parts['Pad'].seedPart(deviationFactor=0.1, 
+    minSizeFactor=0.1, size=25)
+mdb.models['SimplyBeam1'].parts['Pad'].generateMesh()
+mdb.models['SimplyBeam1'].parts['ReinMesh'].seedEdgeByNumber(constraint=FINER, 
+    edges=mdb.models['SimplyBeam1'].parts['ReinMesh'].edges, number=1)
+mdb.models['SimplyBeam1'].parts['ReinMesh'].setElementType(elemTypes=(ElemType(
+    elemCode=T3D2, elemLibrary=STANDARD), ), regions=Region(
+    edges=mdb.models['SimplyBeam1'].parts['ReinMesh'].edges.getSequenceFromMask(
+    mask=('[#ffffffff:7 #7fffffff ]', ), )))
+mdb.models['SimplyBeam1'].parts['ReinMesh'].generateMesh()
+mdb.models['SimplyBeam1'].rootAssembly.regenerate()
+mdb.Job(model='SimplyBeam1', multiprocessingMode=THREADS, name=
+    'Job-SimplyBeam1', numCpus=4, numDomains=4)
+mdb.jobs['Job-SimplyBeam1'].submit(consistencyChecking=OFF)
+mdb.Model(name='SimplyBeam2')
+mdb.models['SimplyBeam2'].Material(name='C30')
+mdb.models['SimplyBeam2'].materials['C30'].Density(table=((2.4e-09, ), ))
+mdb.models['SimplyBeam2'].materials['C30'].Elastic(table=((30000, 0.2), ))
+mdb.models['SimplyBeam2'].materials['C30'].ConcreteDamagedPlasticity(table=((
+    30.0, 0.1, 1.16, 0.6667, 0.005), ))
+mdb.models['SimplyBeam2'].materials['C30'].concreteDamagedPlasticity.ConcreteCompressionHardening(
+    table=array([[11.711185, 0.0], [14.451732, 0.000107], [16.543649, 
+    0.000184], [18.054332, 0.00028], [19.076595, 0.000393], [19.706842, 
+    0.000519], [20.033012, 0.000655], [20.12957, 0.000799], [19.644105, 
+    0.001109], [18.550464, 0.001439], [17.236943, 0.001776], [15.908559, 
+    0.002114], [14.658946, 0.002449], [13.522839, 0.00278], [12.506458, 
+    0.003108], [11.603401, 0.003431], [10.802501, 0.003751], [10.09152, 
+    0.004067], [9.458785, 0.004381], [8.893813, 0.004693], [8.387466, 
+    0.005003], [7.931899, 0.00531], [7.520427, 0.005617], [6.649458, 0.006377], 
+    [5.952889, 0.00713], [5.384823, 0.007879], [4.913646, 0.008624], [4.517062, 
+    0.009366], [4.178986, 0.010106], [3.887568, 0.010843], [3.633909, 
+    0.011579], [3.411207, 0.012313], [3.214184, 0.013046], [3.038683, 
+    0.013778], [2.881394, 0.014508], [2.739643, 0.015237], [2.611255, 
+    0.015966], [2.494436, 0.016693], [2.387701, 0.01742], [2.289806, 0.018146], 
+    [2.199701, 0.018871], [2.116497, 0.019595], [2.039435, 0.020319], 
+    [1.497596, 0.027518], [1.186376, 0.034659], [0.98451, 0.041745], [0.843016, 
+    0.04878], [0.738348, 0.055764], [0.657791, 0.062699], [0.593877, 
+    0.069586]], 'd'))
+mdb.models['SimplyBeam2'].materials['C30'].concreteDamagedPlasticity.ConcreteTensionStiffening(
+    table=array([[2.01019, 0.0], [1.882069, 5.1e-05], [1.689817, 7.6e-05], 
+    [1.510842, 0.000101], [1.359064, 0.000125], [1.233169, 0.000148], 
+    [1.128722, 0.000171], [1.041375, 0.000193], [0.967562, 0.000214], 
+    [0.904509, 0.000235], [0.850086, 0.000256], [0.802662, 0.000276], 
+    [0.760974, 0.000297], [0.724037, 0.000317], [0.691076, 0.000337], 
+    [0.661473, 0.000357], [0.59911, 0.000406], [0.549259, 0.000455], [0.508406, 
+    0.000504], [0.474243, 0.000553], [0.445198, 0.000601], [0.420158, 
+    0.000649], [0.398315, 0.000697], [0.379069, 0.000745], [0.361961, 
+    0.000793], [0.346639, 0.000841], [0.332822, 0.000889], [0.320289, 
+    0.000937], [0.308861, 0.000984], [0.298389, 0.001032], [0.288752, 0.00108], 
+    [0.279849, 0.001127], [0.271595, 0.001175], [0.263918, 0.001222], 
+    [0.256755, 0.00127], [0.250054, 0.001317], [0.200731, 0.001792], [0.170062, 
+    0.002266], [0.148851, 0.002739], [0.133162, 0.003212], [0.12101, 0.003685], 
+    [0.111272, 0.004157], [0.103264, 0.004629]], 'd'))
+mdb.models['SimplyBeam2'].materials['C30'].concreteDamagedPlasticity.ConcreteCompressionDamage(
+    table=array([[0.0, 0.0], [0.09548, 0.000107], [0.13446, 0.000184], 
+    [0.17465, 0.00028], [0.2146, 0.000393], [0.25334, 0.000519], [0.29029, 
+    0.000655], [0.32514, 0.000799], [0.39151, 0.001109], [0.45263, 0.001439], 
+    [0.50652, 0.001776], [0.55309, 0.002114], [0.59308, 0.002449], [0.62741, 
+    0.00278], [0.65699, 0.003108], [0.68261, 0.003431], [0.70494, 0.003751], 
+    [0.72453, 0.004067], [0.74181, 0.004381], [0.75715, 0.004693], [0.77084, 
+    0.005003], [0.78313, 0.00531], [0.79421, 0.005617], [0.81762, 0.006377], 
+    [0.83636, 0.00713], [0.85166, 0.007879], [0.86438, 0.008624], [0.87511, 
+    0.009366], [0.88429, 0.010106], [0.89222, 0.010843], [0.89914, 0.011579], 
+    [0.90523, 0.012313], [0.91063, 0.013046], [0.91546, 0.013778], [0.91979, 
+    0.014508], [0.9237, 0.015237], [0.92725, 0.015966], [0.93048, 0.016693], 
+    [0.93344, 0.01742], [0.93616, 0.018146], [0.93866, 0.018871], [0.94098, 
+    0.019595], [0.94313, 0.020319], [0.95832, 0.027518], [0.96711, 0.034659], 
+    [0.97284, 0.041745], [0.97687, 0.04878], [0.97986, 0.055764], [0.98216, 
+    0.062699], [0.984, 0.069586]]04878], [0.738348, 0.055764], [0.657791, 
+    0.062699], [0.593877, 0.069586]], 'd'))
+mdb.models['SimplyBeam2'].materials['C30'].concreteDamagedPlasticity.ConcreteTensionDamage(
+    table=array([[0.0, 0.0], [0.25729, 5.1e-05], [0.34845, 7.6e-05], [0.42372, 
+    0.000101], [0.48469, 0.000125], [0.53433, 0.000148], [0.57523, 0.000171], 
+    [0.60937, 0.000193], [0.63824, 0.000214], [0.66295, 0.000235], [0.68433, 
+    0.000256], [0.70301, 0.000276], [0.71946, 0.000297], [0.73407, 0.000317], 
+    [0.74712, 0.000337], [0.75886, 0.000357], [0.78364, 0.000406], [0.80347, 
+    0.000455], [0.81973, 0.000504], [0.83331, 0.000553], [0.84483, 0.000601], 
+    [0.85474, 0.000649], [0.86337, 0.000697], [0.87095, 0.000745], [0.87766, 
+    0.000793], [0.88365, 0.000841], [0.88904, 0.000889], [0.89391, 0.000937], 
+    [0.89833, 0.000984], [0.90237, 0.001032], [0.90607, 0.00108], [0.90948, 
+    0.001127], [0.91263, 0.001175], [0.91555, 0.001222], [0.91826, 0.00127], 
+    [0.92079, 0.001317], [0.93909, 0.001792], [0.95013, 0.002266], [0.95757, 
+    0.002739], [0.96294, 0.003212], [0.96702, 0.003685], [0.97024, 0.004157], 
+    [0.97284, 0.004629]] [0.111272, 0.004157], [0.103264, 0.004629]], 'd'))
+mdb.models['SimplyBeam2'].Material('HRB400')
+mdb.models['SimplyBeam2'].materials['HRB400'].Density(((7.85e-09, ), ))
+mdb.models['SimplyBeam2'].materials['HRB400'].Elastic(((200000.0, 0.3), ))
+mdb.models['SimplyBeam2'].materials['HRB400'].Plastic(((400, 0.0), (540, 0.1)))
+mdb.models['SimplyBeam2'].Material('HPB300')
+mdb.models['SimplyBeam2'].materials['HPB300'].Density(((7.85e-09, ), ))
+mdb.models['SimplyBeam2'].materials['HPB300'].Elastic(((210000.0, 0.3), ))
+mdb.models['SimplyBeam2'].materials['HPB300'].Plastic(((300, 0.0), (420, 0.1)))
+mdb.models['SimplyBeam2'].Material('RigidSteel')
+mdb.models['SimplyBeam2'].materials['RigidSteel'].Density(((7.85e-09, ), ))
+mdb.models['SimplyBeam2'].materials['RigidSteel'].Elastic(((210000.0, 0.3), ))
+mdb.models['SimplyBeam2'].TrussSection(area=113.097335529233, material='HRB400'
+    , name='TrD12HRB400')
+mdb.models['SimplyBeam2'].TrussSection(area=254.469004940773, material='HRB400'
+    , name='TrD18HRB400')
+mdb.models['SimplyBeam2'].TrussSection(area=50.2654824574367, material='HPB300'
+    , name='TrD8HPB300')
+mdb.models['SimplyBeam2'].HomogeneousSolidSection(material='C30', name='HmC30', 
+    thickness=None)
+mdb.models['SimplyBeam2'].HomogeneousSolidSection(material='RigidSteel', name=
+    'HmRigidSteel', thickness=None)
+mdb.models['SimplyBeam2'].ConstrainedSketch(name='__profile__', sheetSize=
+    5940.0)
+mdb.models['SimplyBeam2'].sketches['__profile__'].Line((-2475.0, 125.0), (
+    2475.0, 125.0))
+mdb.models['SimplyBeam2'].sketches['__profile__'].linearPattern(angle1=0.0, 
+    angle2=270.0, geomList=(
+    mdb.models['SimplyBeam2'].sketches['__profile__'].geometry[2], ), number1=1
+    , number2=3, spacing1=100.0, spacing2=125.0, vertexList=())
+mdb.models['SimplyBeam2'].Part(dimensionality=THREE_D, name='__ReinMesh_Long__'
+    , type=DEFORMABLE_BODY)
+mdb.models['SimplyBeam2'].parts['__ReinMesh_Long__'].BaseWire(sketch=
+    mdb.models['SimplyBeam2'].sketches['__profile__'])
+del mdb.models['SimplyBeam2'].sketches['__profile__']
+mdb.models['SimplyBeam2'].parts['__ReinMesh_Long__'].Set(edges=
+    mdb.models['SimplyBeam2'].parts['__ReinMesh_Long__'].edges, name=
+    'BottomRein')
+mdb.models['SimplyBeam2'].parts['__ReinMesh_Long__'].DatumPlaneByPrincipalPlane(
+    offset=450.0, principalPlane=XYPLANE)
+mdb.models['SimplyBeam2'].ConstrainedSketch(name='__profile__', sheetSize=
+    9900.0, transform=
+    mdb.models['SimplyBeam2'].parts['__ReinMesh_Long__'].MakeSketchTransform(
+    sketchPlane=mdb.models['SimplyBeam2'].parts['__ReinMesh_Long__'].datums[3], 
+    sketchPlaneSide=SIDE1, 
+    sketchUpEdge=mdb.models['SimplyBeam2'].parts['__ReinMesh_Long__'].edges[0], 
+    sketchOrientation=RIGHT, origin=(0.0, 0.0, 450.0)))
+mdb.models['SimplyBeam2'].parts['__ReinMesh_Long__'].projectReferencesOntoSketch(
+    filter=COPLANAR_EDGES, sketch=
+    mdb.models['SimplyBeam2'].sketches['__profile__'])
+mdb.models['SimplyBeam2'].sketches['__profile__'].Line(point1=(125.0, -2475.0), 
+    point2=(125.0, 2475.0))
+mdb.models['SimplyBeam2'].sketches['__profile__'].linearPattern(angle1=180.0, 
+    angle2=90.0, geomList=(
+    mdb.models['SimplyBeam2'].sketches['__profile__'].geometry[2], ), number1=2
+    , number2=1, spacing1=250.0, spacing2=100.0, vertexList=())
+mdb.models['SimplyBeam2'].parts['__ReinMesh_Long__'].Wire(sketch=
+    mdb.models['SimplyBeam2'].sketches['__profile__'], sketchOrientation=RIGHT, 
+    sketchPlane=mdb.models['SimplyBeam2'].parts['__ReinMesh_Long__'].datums[3], 
+    sketchPlaneSide=SIDE1, sketchUpEdge=
+    mdb.models['SimplyBeam2'].parts['__ReinMesh_Long__'].edges[0])
+del mdb.models['SimplyBeam2'].sketches['__profile__']
+mdb.models['SimplyBeam2'].parts['__ReinMesh_Long__'].getFeatureEdges('Wire-2')
+mdb.models['SimplyBeam2'].parts['__ReinMesh_Long__'].Set(edges=
+    mdb.models['SimplyBeam2'].parts['__ReinMesh_Long__'].edges.getSequenceFromMask(
+    mask=('[#18 ]', ), ), name='TopRein')
+mdb.models['SimplyBeam2'].ConstrainedSketch(name='__profile__', sheetSize=
+    540.0)
+mdb.models['SimplyBeam2'].sketches['__profile__'].rectangle(point1=(-225.0, 
+    -125.0), point2=(225.0, 125.0))
+mdb.models['SimplyBeam2'].Part(dimensionality=THREE_D, name=
+    '____ReinMesh_Stirrups____', type=DEFORMABLE_BODY)
+mdb.models['SimplyBeam2'].parts['____ReinMesh_Stirrups____'].BaseWire(sketch=
+    mdb.models['SimplyBeam2'].sketches['__profile__'])
+del mdb.models['SimplyBeam2'].sketches['__profile__']
+mdb.models['SimplyBeam2'].rootAssembly.Instance(dependent=ON, name=
+    '____ReinMesh_Stirrups____-1', part=
+    mdb.models['SimplyBeam2'].parts['____ReinMesh_Stirrups____'])
+mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1'].rotateAboutAxis(
+    angle=90.0, axisDirection=(0.0, 10.0, 0.0), axisPoint=(0.0, 0.0, 0.0))
+mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1'].translate(
+    vector=(2400.0, 0.0, 0.0))
+mdb.models['SimplyBeam2'].rootAssembly.LinearInstancePattern(direction1=(-1.0, 
+    0.0, 0.0), direction2=(0.0, 1.0, 0.0), instanceList=(
+    '____ReinMesh_Stirrups____-1', ), number1=25, number2=1, spacing1=200.0, 
+    spacing2=100.0)
+mdb.models['SimplyBeam2'].rootAssembly.InstanceFromBooleanMerge(domain=GEOMETRY
+    , instances=
+    [mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-2-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-3-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-4-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-5-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-6-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-7-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-8-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-9-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-10-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-11-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-12-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-13-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-14-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-15-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-16-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-17-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-18-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-19-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-20-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-21-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-22-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-23-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-24-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['____ReinMesh_Stirrups____-1-lin-25-1']]
+    , name='__ReinMesh_Stirrups__', originalInstances=DELETE)
+del mdb.models['SimplyBeam2'].rootAssembly.instances['__ReinMesh_Stirrups__-1']
+del mdb.models['SimplyBeam2'].parts['____ReinMesh_Stirrups____']
+mdb.models['SimplyBeam2'].parts['__ReinMesh_Stirrups__'].Set(edges=
+    mdb.models['SimplyBeam2'].parts['__ReinMesh_Stirrups__'].edges, name=
+    'Stirrups')
+mdb.models['SimplyBeam2'].rootAssembly.Instance(dependent=ON, name=
+    '__ReinMesh_Long__-1', part=
+    mdb.models['SimplyBeam2'].parts['__ReinMesh_Long__'])
+mdb.models['SimplyBeam2'].rootAssembly.Instance(dependent=ON, name=
+    '__ReinMesh_Stirrups__-1', part=
+    mdb.models['SimplyBeam2'].parts['__ReinMesh_Stirrups__'])
+mdb.models['SimplyBeam2'].rootAssembly.instances['__ReinMesh_Stirrups__-1'].translate(
+    vector=(0.0, 0.0, 225.0))
+mdb.models['SimplyBeam2'].parts['__ReinMesh_Long__'].SectionAssignment(
+    mdb.models['SimplyBeam2'].parts['__ReinMesh_Long__'].sets['BottomRein'], 
+    'TrD18HRB400')
+mdb.models['SimplyBeam2'].parts['__ReinMesh_Long__'].SectionAssignment(
+    mdb.models['SimplyBeam2'].parts['__ReinMesh_Long__'].sets['TopRein'], 
+    'TrD12HRB400')
+mdb.models['SimplyBeam2'].parts['__ReinMesh_Stirrups__'].SectionAssignment(
+    mdb.models['SimplyBeam2'].parts['__ReinMesh_Stirrups__'].sets['Stirrups'], 
+    'TrD8HPB300')
+mdb.models['SimplyBeam2'].rootAssembly.InstanceFromBooleanMerge(domain=GEOMETRY
+    , instances=(
+    mdb.models['SimplyBeam2'].rootAssembly.instances['__ReinMesh_Long__-1'], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['__ReinMesh_Stirrups__-1'])
+    , name='ReinMesh', originalInstances=DELETE)
+mdb.models['SimplyBeam2'].parts['ReinMesh'].Set(edges=
+    mdb.models['SimplyBeam2'].parts['ReinMesh'].edges, name='All')
+del mdb.models['SimplyBeam2'].rootAssembly.instances['ReinMesh-1']
+del mdb.models['SimplyBeam2'].parts['__ReinMesh_Long__']
+del mdb.models['SimplyBeam2'].parts['__ReinMesh_Stirrups__']
+mdb.models['SimplyBeam2'].ConstrainedSketch(name='__profile__', sheetSize=
+    6000.0)
+mdb.models['SimplyBeam2'].sketches['__profile__'].rectangle(point1=(-2500.0, 
+    -150.0), point2=(2500.0, 150.0))
+mdb.models['SimplyBeam2'].Part('Beam', dimensionality=THREE_D, type=
+    DEFORMABLE_BODY)
+mdb.models['SimplyBeam2'].parts['Beam'].BaseSolidExtrude(depth=500.0, sketch=
+    mdb.models['SimplyBeam2'].sketches['__profile__'])
+del mdb.models['SimplyBeam2'].sketches['__profile__']
+mdb.models['SimplyBeam2'].parts['Beam'].Set(cells=
+    mdb.models['SimplyBeam2'].parts['Beam'].cells, name='All')
+mdb.models['SimplyBeam2'].parts['Beam'].SectionAssignment(region=
+    mdb.models['SimplyBeam2'].parts['Beam'].sets['All'], sectionName='HmC30')
+mdb.models['SimplyBeam2'].parts['Beam'].DatumPointByCoordinate(coords=(0, 
+    150.0, 500.0))
+mdb.models['SimplyBeam2'].parts['Beam'].PartitionCellByPlanePointNormal(cells=
+    mdb.models['SimplyBeam2'].parts['Beam'].cells, normal=
+    mdb.models['SimplyBeam2'].parts['Beam'].edges[6], point=
+    mdb.models['SimplyBeam2'].parts['Beam'].datums[3])
+mdb.models['SimplyBeam2'].parts['Beam'].PartitionEdgeByParam(edges=
+    mdb.models['SimplyBeam2'].parts['Beam'].edges[2], parameter=0.5)
+mdb.models['SimplyBeam2'].parts['Beam'].Set(name='MidPoint', vertices=
+    mdb.models['SimplyBeam2'].parts['Beam'].vertices.getSequenceFromMask(mask=(
+    '[#8 ]', ), ))
+mdb.models['SimplyBeam2'].parts['Beam'].DatumPointByCoordinate(coords=(2300.0, 
+    150.0, 500.0))
+mdb.models['SimplyBeam2'].parts['Beam'].DatumPointByCoordinate(coords=(-2300.0, 
+    150.0, 500.0))
+mdb.models['SimplyBeam2'].parts['Beam'].PartitionCellByPlanePointNormal(cells=
+    mdb.models['SimplyBeam2'].parts['Beam'].cells, normal=
+    mdb.models['SimplyBeam2'].parts['Beam'].edges[10], point=
+    mdb.models['SimplyBeam2'].parts['Beam'].datums[7])
+mdb.models['SimplyBeam2'].parts['Beam'].PartitionCellByPlanePointNormal(cells=
+    mdb.models['SimplyBeam2'].parts['Beam'].cells, normal=
+    mdb.models['SimplyBeam2'].parts['Beam'].edges[20], point=
+    mdb.models['SimplyBeam2'].parts['Beam'].datums[8])
+mdb.models['SimplyBeam2'].parts['Beam'].Surface(name='ToPads', side1Faces=
+    mdb.models['SimplyBeam2'].parts['Beam'].faces.getSequenceFromMask(mask=(
+    '[#840 ]', ), ))
+mdb.models['SimplyBeam2'].parts['Beam'].DatumPointByCoordinate(coords=(
+    933.333333333333, 150.0, 500.0))
+mdb.models['SimplyBeam2'].parts['Beam'].DatumPointByCoordinate(coords=(
+    733.333333333333, 150.0, 500.0))
+mdb.models['SimplyBeam2'].parts['Beam'].DatumPointByCoordinate(coords=(
+    -733.333333333333, 150.0, 500.0))
+mdb.models['SimplyBeam2'].parts['Beam'].DatumPointByCoordinate(coords=(
+    -933.333333333333, 150.0, 500.0))
+mdb.models['SimplyBeam2'].parts['Beam'].PartitionCellByPlanePointNormal(cells=
+    mdb.models['SimplyBeam2'].parts['Beam'].cells, normal=
+    mdb.models['SimplyBeam2'].parts['Beam'].edges[31], point=
+    mdb.models['SimplyBeam2'].parts['Beam'].datums[12])
+mdb.models['SimplyBeam2'].parts['Beam'].PartitionCellByPlanePointNormal(cells=
+    mdb.models['SimplyBeam2'].parts['Beam'].cells, normal=
+    mdb.models['SimplyBeam2'].parts['Beam'].edges[4], point=
+    mdb.models['SimplyBeam2'].parts['Beam'].datums[13])
+mdb.models['SimplyBeam2'].parts['Beam'].PartitionCellByPlanePointNormal(cells=
+    mdb.models['SimplyBeam2'].parts['Beam'].cells, normal=
+    mdb.models['SimplyBeam2'].parts['Beam'].edges[16], point=
+    mdb.models['SimplyBeam2'].parts['Beam'].datums[14])
+mdb.models['SimplyBeam2'].parts['Beam'].PartitionCellByPlanePointNormal(cells=
+    mdb.models['SimplyBeam2'].parts['Beam'].cells, normal=
+    mdb.models['SimplyBeam2'].parts['Beam'].edges[28], point=
+    mdb.models['SimplyBeam2'].parts['Beam'].datums[15])
+mdb.models['SimplyBeam2'].parts['Beam'].Surface(name='ToLoad', side1Faces=
+    mdb.models['SimplyBeam2'].parts['Beam'].faces.getSequenceFromMask(mask=(
+    '[#10000000 #80 ]', ), ))
+mdb.models['SimplyBeam2'].ConstrainedSketch(name='__profile__', sheetSize=
+    360.0)
+mdb.models['SimplyBeam2'].sketches['__profile__'].rectangle(point1=(-100.0, 
+    -150.0), point2=(100.0, 150.0))
+mdb.models['SimplyBeam2'].Part('Pad', dimensionality=THREE_D, type=
+    DEFORMABLE_BODY)
+mdb.models['SimplyBeam2'].parts['Pad'].BaseSolidExtrude(depth=50.0, sketch=
+    mdb.models['SimplyBeam2'].sketches['__profile__'])
+del mdb.models['SimplyBeam2'].sketches['__profile__']
+mdb.models['SimplyBeam2'].parts['Pad'].Set(cells=
+    mdb.models['SimplyBeam2'].parts['Pad'].cells, name='All')
+mdb.models['SimplyBeam2'].parts['Pad'].SectionAssignment(region=
+    mdb.models['SimplyBeam2'].parts['Pad'].sets['All'], sectionName=
+    'HmRigidSteel')
+mdb.models['SimplyBeam2'].parts['Pad'].Surface(name='Top', side1Faces=
+    mdb.models['SimplyBeam2'].parts['Pad'].faces.getSequenceFromMask(mask=(
+    '[#10 ]', ), ))
+mdb.models['SimplyBeam2'].parts['Pad'].Surface(name='Bottom', side1Faces=
+    mdb.models['SimplyBeam2'].parts['Pad'].faces.getSequenceFromMask(mask=(
+    '[#20 ]', ), ))
+mdb.models['SimplyBeam2'].parts['Pad'].ReferencePoint(point=(0.0, 0.0, 0.0))
+mdb.models['SimplyBeam2'].rootAssembly.Instance(dependent=ON, name='Beam1', 
+    part=mdb.models['SimplyBeam2'].parts['Beam'])
+mdb.models['SimplyBeam2'].rootAssembly.Instance(dependent=ON, name='ReinMesh1', 
+    part=mdb.models['SimplyBeam2'].parts['ReinMesh'])
+mdb.models['SimplyBeam2'].rootAssembly.Instance(dependent=ON, name='PadL', 
+    part=mdb.models['SimplyBeam2'].parts['Pad'])
+mdb.models['SimplyBeam2'].rootAssembly.Instance(dependent=ON, name='PadR', 
+    part=mdb.models['SimplyBeam2'].parts['Pad'])
+mdb.models['SimplyBeam2'].rootAssembly.Instance(dependent=ON, name='PadTL', 
+    part=mdb.models['SimplyBeam2'].parts['Pad'])
+mdb.models['SimplyBeam2'].rootAssembly.Instance(dependent=ON, name='PadTR', 
+    part=mdb.models['SimplyBeam2'].parts['Pad'])
+mdb.models['SimplyBeam2'].rootAssembly.instances['ReinMesh1'].translate(vector=
+    (0, 0, 25.0))
+mdb.models['SimplyBeam2'].rootAssembly.instances['PadL'].translate(vector=(
+    2400.0, 0, -50.0))
+mdb.models['SimplyBeam2'].rootAssembly.instances['PadR'].translate(vector=(
+    -2400.0, 0, -50.0))
+mdb.models['SimplyBeam2'].rootAssembly.instances['PadTL'].rotateAboutAxis((0, 
+    0, 0), (0, 1, 0), 180)
+mdb.models['SimplyBeam2'].rootAssembly.instances['PadTL'].translate(vector=(
+    833.333333333333, 0, 550.0))
+mdb.models['SimplyBeam2'].rootAssembly.instances['PadTR'].rotateAboutAxis((0, 
+    0, 0), (0, 1, 0), 180)
+mdb.models['SimplyBeam2'].rootAssembly.instances['PadTR'].translate(vector=(
+    -833.333333333333, 0, 550.0))
+mdb.models['SimplyBeam2'].rootAssembly.Set(name='RpL', referencePoints=(
+    mdb.models['SimplyBeam2'].rootAssembly.instances['PadL'].referencePoints[5], 
+    ))
+mdb.models['SimplyBeam2'].rootAssembly.Set(name='RpR', referencePoints=(
+    mdb.models['SimplyBeam2'].rootAssembly.instances['PadR'].referencePoints[5], 
+    ))
+mdb.models['SimplyBeam2'].rootAssembly.Set(name='RpTL', referencePoints=(
+    mdb.models['SimplyBeam2'].rootAssembly.instances['PadTL'].referencePoints[5], 
+    ))
+mdb.models['SimplyBeam2'].rootAssembly.Set(name='RpTR', referencePoints=(
+    mdb.models['SimplyBeam2'].rootAssembly.instances['PadTR'].referencePoints[5], 
+    ))
+mdb.models['SimplyBeam2'].rootAssembly.Surface(name='BCPads', side1Faces=
+    mdb.models['SimplyBeam2'].rootAssembly.instances['PadL'].faces.getSequenceFromMask(
+    mask=('[#10 ]', ), )+\
+    mdb.models['SimplyBeam2'].rootAssembly.instances['PadR'].faces.getSequenceFromMask(
+    mask=('[#10 ]', ), ))
+mdb.models['SimplyBeam2'].rootAssembly.Surface(name='LoadPads', side1Faces=
+    mdb.models['SimplyBeam2'].rootAssembly.instances['PadTL'].faces.getSequenceFromMask(
+    mask=('[#10 ]', ), )+\
+    mdb.models['SimplyBeam2'].rootAssembly.instances['PadTR'].faces.getSequenceFromMask(
+    mask=('[#10 ]', ), ))
+mdb.models['SimplyBeam2'].StaticStep(initialInc=0.01, maxInc=0.2, maxNumInc=
+    10000, minInc=1e-06, name='Step-1', previous='Initial', timePeriod=0.2)
+mdb.models['SimplyBeam2'].StaticStep(initialInc=0.01, maxInc=1, maxNumInc=10000
+    , minInc=1e-06, name='Step-2', previous='Step-1', timePeriod=1)
+mdb.models['SimplyBeam2'].Gravity(comp3=-9810, createStepName='Step-1', name=
+    'Load-G')
+mdb.models['SimplyBeam2'].ConcentratedForce(cf3=-120000.0, createStepName=
+    'Step-2', name='Load-CF', region=Region(referencePoints=(
+    mdb.models['SimplyBeam2'].rootAssembly.instances['PadTL'].referencePoints[5], 
+    mdb.models['SimplyBeam2'].rootAssembly.instances['PadTR'].referencePoints[5], 
+    )))
+mdb.models['SimplyBeam2'].DisplacementBC(createStepName='Initial', name='BC-R', 
+    region=mdb.models['SimplyBeam2'].rootAssembly.sets['RpR'], u1=UNSET, u2=SET
+    , u3=SET, ur1=SET, ur2=UNSET, ur3=SET)
+mdb.models['SimplyBeam2'].DisplacementBC(createStepName='Initial', name='BC-L', 
+    region=mdb.models['SimplyBeam2'].rootAssembly.sets['RpL'], u1=SET, u2=SET, 
+    u3=SET, ur1=SET, ur2=UNSET, ur3=SET)
+mdb.models['SimplyBeam2'].FieldOutputRequest(createStepName='Step-1', name=
+    'F-Output-1', variables=('E', 'S', 'U', 'DAMAGEC', 'DAMAGET'))
+mdb.models['SimplyBeam2'].HistoryOutputRequest(createStepName='Step-1', name=
+    'H-Output-1', region=
+    mdb.models['SimplyBeam2'].rootAssembly.instances['Beam1'].sets['MidPoint'], 
+    variables=('U3', ))
+mdb.models['SimplyBeam2'].HistoryOutputRequest(createStepName='Step-1', name=
+    'H-Output-2', region=mdb.models['SimplyBeam2'].rootAssembly.sets['RpL'], 
+    variables=('RF3', ))
+mdb.models['SimplyBeam2'].HistoryOutputRequest(createStepName='Step-1', name=
+    'H-Output-3', region=mdb.models['SimplyBeam2'].rootAssembly.sets['RpR'], 
+    variables=('RF3', ))
+mdb.models['SimplyBeam2'].Coupling(controlPoint=
+    mdb.models['SimplyBeam2'].rootAssembly.sets['RpR'], couplingType=KINEMATIC, 
+    influenceRadius=WHOLE_SURFACE, name='Cg-RpR', surface=
+    mdb.models['SimplyBeam2'].rootAssembly.instances['PadR'].surfaces['Bottom'])
+mdb.models['SimplyBeam2'].Coupling(controlPoint=
+    mdb.models['SimplyBeam2'].rootAssembly.sets['RpL'], couplingType=KINEMATIC, 
+    influenceRadius=WHOLE_SURFACE, name='Cg-RpL', surface=
+    mdb.models['SimplyBeam2'].rootAssembly.instances['PadL'].surfaces['Bottom'])
+mdb.models['SimplyBeam2'].Coupling(controlPoint=
+    mdb.models['SimplyBeam2'].rootAssembly.sets['RpTL'], couplingType=KINEMATIC
+    , influenceRadius=WHOLE_SURFACE, name='Cg-RpTL', surface=
+    mdb.models['SimplyBeam2'].rootAssembly.instances['PadTL'].surfaces['Bottom'])
+mdb.models['SimplyBeam2'].Coupling(controlPoint=
+    mdb.models['SimplyBeam2'].rootAssembly.sets['RpTR'], couplingType=KINEMATIC
+    , influenceRadius=WHOLE_SURFACE, name='Cg-RpTR', surface=
+    mdb.models['SimplyBeam2'].rootAssembly.instances['PadTR'].surfaces['Bottom'])
+mdb.models['SimplyBeam2'].Tie(adjust=ON, main=
+    mdb.models['SimplyBeam2'].rootAssembly.instances['Beam1'].surfaces['ToPads']
+    , name='Tie-BeamPads', positionToleranceMethod=COMPUTED, secondary=
+    mdb.models['SimplyBeam2'].rootAssembly.surfaces['BCPads'], thickness=ON, 
+    tieRotations=ON)
+mdb.models['SimplyBeam2'].Tie(adjust=ON, main=
+    mdb.models['SimplyBeam2'].rootAssembly.instances['Beam1'].surfaces['ToLoad']
+    , name='Tie-BeamPadsT', positionToleranceMethod=COMPUTED, secondary=
+    mdb.models['SimplyBeam2'].rootAssembly.surfaces['LoadPads'], thickness=ON, 
+    tieRotations=ON)
+mdb.models['SimplyBeam2'].EmbeddedRegion(absoluteTolerance=0.0, embeddedRegion=
+    Region(
+    edges=mdb.models['SimplyBeam2'].rootAssembly.instances['ReinMesh1'].edges.getSequenceFromMask(
+    mask=('[#ffffffff:7 #7fffffff ]', ), )), fractionalTolerance=0.05, 
+    hostRegion=Region(
+    cells=mdb.models['SimplyBeam2'].rootAssembly.instances['Beam1'].cells.getSequenceFromMask(
+    mask=('[#ff ]', ), )), name='Em-ReinMeshBeam', toleranceMethod=BOTH, 
+    weightFactorTolerance=1e-06)
+mdb.models['SimplyBeam2'].parts['Beam'].seedPart(deviationFactor=0.1, 
+    minSizeFactor=0.1, size=50)
+mdb.models['SimplyBeam2'].parts['Beam'].generateMesh()
+mdb.models['SimplyBeam2'].parts['Pad'].seedPart(deviationFactor=0.1, 
+    minSizeFactor=0.1, size=25)
+mdb.models['SimplyBeam2'].parts['Pad'].generateMesh()
+mdb.models['SimplyBeam2'].parts['ReinMesh'].seedEdgeByNumber(constraint=FINER, 
+    edges=mdb.models['SimplyBeam2'].parts['ReinMesh'].edges, number=1)
+mdb.models['SimplyBeam2'].parts['ReinMesh'].setElementType(elemTypes=(ElemType(
+    elemCode=T3D2, elemLibrary=STANDARD), ), regions=Region(
+    edges=mdb.models['SimplyBeam2'].parts['ReinMesh'].edges.getSequenceFromMask(
+    mask=('[#ffffffff:7 #7fffffff ]', ), )))
+mdb.models['SimplyBeam2'].parts['ReinMesh'].generateMesh()
+mdb.models['SimplyBeam2'].rootAssembly.regenerate()
+mdb.Job(model='SimplyBeam2', multiprocessingMode=THREADS, name=
+    'Job-SimplyBeam2', numCpus=4, numDomains=4)
+mdb.jobs['Job-SimplyBeam2'].submit(consistencyChecking=OFF)
+# Save by Alice on 2025_03_30-02.28.35; build 2022 2021_09_16-01.57.30 176069
