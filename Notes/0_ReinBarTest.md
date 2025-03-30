@@ -111,7 +111,7 @@ part.BaseWire(sketch=skh)
 del model.sketches[skh.name]
 ```
 
-这将生成一个3维可变形线部件，在生成部件后需要删除临时的草图。
+这将生成一个3维可变形线部件，部件中心在 0,0 点。在生成部件后需要删除临时的草图。
 
 ### 4. 材料属性与截面
 
@@ -148,11 +148,7 @@ hrb400.Plastic(scaleStress=None, table=((yie, 0.0), (limit, 0.1)))
 ``` python
 # 钢筋直径
 d = 8
-<<<<<<< HEAD
 area = (d / 2) ** 2 * math.pi 
-=======
-area = (d / 2) ** 2 * math.pi
->>>>>>> 68e8814 (Fix Bug)
 # 截面
 section_name = 'TrD%d' % d + material_name
 model.TrussSection(name=section_name, material=hrb400.name, area=area)
