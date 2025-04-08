@@ -1,5 +1,7 @@
 # Abaqus2022 Python Scripting Learning Notes  
 
+[English](./README_EN.md) | [中文](./README.md)
+
 ### Introduction  
 
 This documentation records my learning journey of Python scripting for Abaqus secondary development, covering fundamental operations, scripting techniques, and practical problem-solving approaches.  
