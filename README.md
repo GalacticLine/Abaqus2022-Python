@@ -1,5 +1,7 @@
 # Abaqus2022 Python 二次开发学习笔记
+
 [English](./README_EN.md) | [中文](./README.md)
+
 ### 前言
 
 笔记主要记录我在 Abaqus 中使用 Python 进行二次开发的学习历程，包括基础操作、脚本编写技巧以及实际应用中的问题与解决方案的总结。
